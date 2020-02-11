@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="fullstack_slutprojekt:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>fullstack_slutprojekt</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="fullstack_slutprojekt-1.0.war">
+      <element id="artifact" artifact-name="fullstack_slutprojekt:war exploded" />
+    </root>
+  </artifact>
+</component>
