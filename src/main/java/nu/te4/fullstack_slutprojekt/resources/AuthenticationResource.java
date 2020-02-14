@@ -8,11 +8,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import nu.te4.fullstack_slutprojekt.beans.AuthenticationBean;
 import nu.te4.fullstack_slutprojekt.entities.Credentials;
 
 /**
- *
  * @author erikh
  */
 @Path("")
@@ -30,7 +30,7 @@ public class AuthenticationResource {
     }
 
     @GET
-    @Path("register")
+    @Path("verify")
     public Response verify(String token) {
         return null;
     }

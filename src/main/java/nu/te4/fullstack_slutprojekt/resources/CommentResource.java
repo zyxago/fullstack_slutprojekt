@@ -11,11 +11,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import nu.te4.fullstack_slutprojekt.beans.CommentBean;
 import nu.te4.fullstack_slutprojekt.entities.Comment;
 
 /**
- *
  * @author erikh
  */
 @Path("")
@@ -35,6 +35,18 @@ public class CommentResource {
     @POST
     @Path("/comment")
     public Response addComment(Comment comment) {
+        return null;
+    }
+
+    @POST
+    @Path("/comment/repport/{id}")
+    public Response repportComment(@PathParam("id") int id) {
+        return null;
+    }
+
+    @POST
+    @Path("/comment/like/{id}")
+    public Response likeComment(@PathParam("id") int id) {
         return null;
     }
 

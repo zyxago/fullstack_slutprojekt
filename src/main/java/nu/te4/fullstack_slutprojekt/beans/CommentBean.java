@@ -2,29 +2,37 @@ package nu.te4.fullstack_slutprojekt.beans;
 
 import java.util.List;
 import javax.ejb.Stateless;
+
 import nu.te4.fullstack_slutprojekt.entities.Comment;
 
 /**
- *
  * @author erikh
  */
 @Stateless
 public class CommentBean {
-    
-        public List<Comment> getComments(){
+
+    public List<Comment> getComments() {
         return null;
     }
-    
-    public int addComment(Comment comment){
+
+    public int addComment(Comment comment) {
         return 0;
     }
-    
-    public int modifyComment(int id){
+
+    public int modifyComment(int id) {
         return 0;
     }
-    
-    public int removeComment(int id){
+
+    public int likeComment() {
         return 0;
     }
-    
+
+    public int repportComment() {
+        return 0;
+    }
+
+    public int removeComment(int id) {
+        return 0;
+    }
+
 }

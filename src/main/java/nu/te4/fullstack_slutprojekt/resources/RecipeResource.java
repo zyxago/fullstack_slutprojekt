@@ -11,11 +11,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import nu.te4.fullstack_slutprojekt.beans.RecipeBean;
 import nu.te4.fullstack_slutprojekt.entities.Recipe;
 
 /**
- *
  * @author erikh
  */
 @Path("")
@@ -35,6 +35,18 @@ public class RecipeResource {
     @POST
     @Path("/recipe")
     public Response addRecipe(Recipe recipe) {
+        return null;
+    }
+
+    @POST
+    @Path("/recipe/repport/{id}")
+    public Response repportRecipe(@PathParam("id") int id) {
+        return null;
+    }
+
+    @POST
+    @Path("/recipe/like/{id}")
+    public Response likeRecipe(@PathParam("id") int id) {
         return null;
     }
 
