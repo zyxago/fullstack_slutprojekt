@@ -19,7 +19,7 @@ public class Comment extends Post{
         this.text = builder.getText();
     }
 
-    private Comment(){}
+    public Comment(){}
 
     public int getParentId() {
         return parentId;

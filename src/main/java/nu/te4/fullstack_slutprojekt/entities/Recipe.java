@@ -26,7 +26,7 @@ public class Recipe extends Post {
         this.categories = builder.getCategories();
     }
 
-    private Recipe(){}
+    public Recipe(){}
 
     public String getImage() {
         return image;
