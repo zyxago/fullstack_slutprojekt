@@ -52,7 +52,7 @@ public class RecipeResource {
 
     @PUT
     @Path("/recipe/{id}")
-    public Response modifyRecipe(@PathParam("id") int id) {
+    public Response modifyRecipe(@PathParam("id") int id, Recipe recipe) {
         return null;
     }
 

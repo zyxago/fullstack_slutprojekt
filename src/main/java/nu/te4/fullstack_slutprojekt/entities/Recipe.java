@@ -5,13 +5,14 @@
  */
 package nu.te4.fullstack_slutprojekt.entities;
 
+import java.sql.Blob;
 import java.util.List;
 
 /**
  * @author erikh
  */
 public class Recipe extends Post {
-    private String image;
+    private Blob image;
     private String information;
     private List<String> instructions;
     private List<Ingredient> ingredients;
@@ -28,11 +29,11 @@ public class Recipe extends Post {
 
     public Recipe(){}
 
-    public String getImage() {
+    public Blob getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(Blob image) {
         this.image = image;
     }
 

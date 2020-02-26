@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3eac87e9-b39f-4028-84d0-da76a2e7576f" name="Default Changelist" comment="" />
+    <list default="true" id="3eac87e9-b39f-4028-84d0-da76a2e7576f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/RecipeBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/RecipeBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/Recipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/Recipe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/RecipeBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/RecipeBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/resources/RecipeResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/resources/RecipeResource.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,7 +34,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../shooterGame" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager" selected="JUnit.RecipeBuilderTest">
     <configuration name="CommentBuilderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -97,6 +103,7 @@
       <workItem from="1582199959459" duration="38000" />
       <workItem from="1582532616268" duration="13000" />
       <workItem from="1582533050494" duration="7110000" />
+      <workItem from="1582713985865" duration="4221000" />
     </task>
     <servers />
   </component>

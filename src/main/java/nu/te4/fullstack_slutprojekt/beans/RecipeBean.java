@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 import nu.te4.fullstack_slutprojekt.ConnectionFactory;
+import nu.te4.fullstack_slutprojekt.entities.Comment;
 import nu.te4.fullstack_slutprojekt.entities.Ingredient;
 import nu.te4.fullstack_slutprojekt.entities.Recipe;
 import nu.te4.fullstack_slutprojekt.entities.RecipeBuilder;
@@ -29,6 +30,7 @@ public class RecipeBean {
         try (Connection conn = new ConnectionFactory().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM recipe");
             ResultSet data = stmt.executeQuery();
+            CallableStatement cs = conn.prepareCall("CALL recipe_attached_data(?)");
             while (data.next()) {
                 List<Ingredient> ingredientList = new ArrayList<>();
                 List<String> categoryList = new ArrayList<>();
@@ -36,14 +38,12 @@ public class RecipeBean {
                 RecipeBuilder recipeBuilder = new RecipeBuilder()
                         .setId(data.getInt("id"))
                         .setWriterId(data.getInt("writer_id"))
-                        .setImage(data.getString("img"))
+                        .setImage(data.getBlob("img"))
                         .setLikes(data.getInt("likes"))
                         .setRepports(data.getInt("repports"))
                         .setInformation(data.getString("info"));
 
-                CallableStatement cs = conn.prepareCall("CALL recipe_attached_data(?)");
                 cs.setInt(1, data.getInt("id"));
-
                 if (cs.execute()) {
                     //Get ingredient list
                     ResultSet resData = cs.getResultSet();
@@ -86,24 +86,77 @@ public class RecipeBean {
     }
 
     public int addRecipe(Recipe recipe) {
-        try (Connection conn = new ConnectionFactory().getConnection()){
-            PreparedStatement stmt = conn.prepareStatement("");
-        } catch (Exception e){
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO recipe VALUES(null, ?, ?, ?, ?)");
+            stmt.setInt(1, recipe.getWriterId());
+            stmt.setBlob(2, recipe.getImage());
+            stmt.setString(3, recipe.getInformation());
+            //TODO metod som fixar stats id
+        } catch (Exception e) {
             LOGGER.error("Error in RecipeBean.addRecipe: " + e.getMessage());
         }
         return 0;
     }
 
-    public int modifyRecipe(int id) {
+    private void addIngredientList(int id, List<Ingredient> ingredientList) {
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT addIngredient(?)");//Lägg till ingrediens via function som returnerar 1 om den lyckades 0 om fail
+            for (Ingredient ingredient : ingredientList) {
+                stmt.setString(1, ingredient.getName());
+                stmt.executeQuery();
+                mapIngredientToRecipe(id, ingredient);
+            }
+        } catch (Exception e) {
+            LOGGER.error("Error in RecipeBean.addIngredientList: " + e.getMessage());
+        }
+    }
+
+    private int mapIngredientToRecipe(int id, Ingredient ingredient) {
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO ingredient_recipe VALUES(?, ?, ?, ?)");
+            stmt.setInt(1, id);
+            stmt.setString(2, ingredient.getName());
+            stmt.setInt(3, ingredient.getAmount());
+            stmt.setString(4, ingredient.getMessurment());
+            return stmt.executeUpdate();
+        } catch (Exception e) {
+            LOGGER.error("Error in RecipeBean.addIngredientList: " + e.getMessage());
+        }
         return 0;
     }
 
-    public int likeRecipe() {
+    private int addCommentList(int id, List<Comment> commentList) {
         return 0;
     }
 
-    public int repportRecipe() {
+    private int addCategoryList(int id, List<String> categoryList) {
         return 0;
+    }
+
+    public int modifyRecipe(int id, Recipe recipe) {
+        return 0;
+    }
+
+    public int likeRecipe(int id) {
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE stats SET likes = likes+1 WHERE id IN (SELECT stats_id FROM recipe WHERE id = ?)");
+            stmt.setInt(1, id);
+            return stmt.executeUpdate();
+        } catch (Exception e) {
+            LOGGER.error("Error in RecipeBean.likeRecipe: " + e.getMessage());
+            return 0;
+        }
+    }
+
+    public int repportRecipe(int id) {
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE stats SET repports = repports+1 WHERE id IN (SELECT stats_id FROM recipe WHERE id = ?)");
+            stmt.setInt(1, id);
+            return stmt.executeUpdate();
+        } catch (Exception e) {
+            LOGGER.error("Error in RecipeBean.repportRecipe: " + e.getMessage());
+            return 0;
+        }
     }
 
     public int removeRecipe(int id) {

@@ -1,9 +1,10 @@
 package nu.te4.fullstack_slutprojekt.entities;
 
+import java.sql.Blob;
 import java.util.List;
 
 public class RecipeBuilder {
-    private String image;
+    private Blob image;
     private String information;
     private List<String> instructions;
     private List<Ingredient> ingredients;
@@ -23,9 +24,6 @@ public class RecipeBuilder {
         if (getWriterId() < 0) {
             setWriterId(0);
         }
-        if (getImage() == null) {
-            setImage("No Image");
-        }
         if (getInformation() == null) {
             setInformation("No Information available");
         }
@@ -41,11 +39,11 @@ public class RecipeBuilder {
         return new Recipe(this);
     }
 
-    public String getImage() {
+    public Blob getImage() {
         return image;
     }
 
-    public RecipeBuilder setImage(String image) {
+    public RecipeBuilder setImage(Blob image) {
         this.image = image;
         return this;
     }
