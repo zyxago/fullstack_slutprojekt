@@ -15,6 +15,8 @@ import javax.ws.rs.core.Response;
 import nu.te4.fullstack_slutprojekt.beans.RecipeBean;
 import nu.te4.fullstack_slutprojekt.entities.Recipe;
 
+import java.util.List;
+
 /**
  * @author erikh
  */
@@ -28,26 +30,39 @@ public class RecipeResource {
 
     @GET
     @Path("/recipes")
-    public Response getRecepies() {
-        return null;
+    public Response getRecipes() {
+        List<Recipe> recipes = recipeBean.getRecipes();
+        if(recipes.isEmpty()){
+            return Response.status(Response.Status.OK).entity(recipes).build();
+        }
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 
     @POST
     @Path("/recipe")
     public Response addRecipe(Recipe recipe) {
-        return null;
+        if(recipeBean.addRecipe(recipe) > 0){
+            return Response.status(Response.Status.CREATED).build();
+        }
+        return  Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @POST
     @Path("/recipe/repport/{id}")
     public Response repportRecipe(@PathParam("id") int id) {
-        return null;
+        if(recipeBean.repportRecipe(id) > 0){
+            return Response.status(Response.Status.OK).build();
+        }
+        return  Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @POST
     @Path("/recipe/like/{id}")
     public Response likeRecipe(@PathParam("id") int id) {
-        return null;
+        if(recipeBean.likeRecipe(id) > 0){
+            return Response.status(Response.Status.OK).build();
+        }
+        return  Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @PUT

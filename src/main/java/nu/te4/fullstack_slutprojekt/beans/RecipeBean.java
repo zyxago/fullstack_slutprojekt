@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import nu.te4.fullstack_slutprojekt.ConnectionFactory;
@@ -24,6 +25,16 @@ public class RecipeBean {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RecipeBean.class);
 
+    @EJB
+    IngredientBean ingredientBean;
+    @EJB
+    CategoryBean categoryBean;
+    @EJB
+    InstructionBean instructionBean;
+
+    /**
+     * @return
+     */
     public List<Recipe> getRecipes() {
         LOGGER.debug("Getting recipes.");
         List<Recipe> recipeList = new ArrayList<>();
@@ -32,9 +43,6 @@ public class RecipeBean {
             ResultSet data = stmt.executeQuery();
             CallableStatement cs = conn.prepareCall("CALL recipe_attached_data(?)");
             while (data.next()) {
-                List<Ingredient> ingredientList = new ArrayList<>();
-                List<String> categoryList = new ArrayList<>();
-                List<String> instructionList = new ArrayList<>();
                 RecipeBuilder recipeBuilder = new RecipeBuilder()
                         .setId(data.getInt("id"))
                         .setWriterId(data.getInt("writer_id"))
@@ -45,36 +53,17 @@ public class RecipeBean {
 
                 cs.setInt(1, data.getInt("id"));
                 if (cs.execute()) {
-                    //Get ingredient list
                     ResultSet resData = cs.getResultSet();
-                    while (resData.next()) {
-                        ingredientList.add(new Ingredient(
-                                resData.getString("ingredient"),
-                                resData.getInt("amount"),
-                                resData.getString("messurment")));
-                    }
-                    recipeBuilder.setIngredients(ingredientList);
+                    recipeBuilder.setIngredients(ingredientBean.getIngredients(resData));
                     resData.close();
 
-                    if (cs.getMoreResults()) {
-                        //Get category list
-                        resData = cs.getResultSet();
-                        while (resData.next()) {
-                            categoryList.add(resData.getString("category"));
-                        }
-                        recipeBuilder.setCategories(categoryList);
-                        resData.close();
+                    resData = cs.getResultSet();
+                    recipeBuilder.setCategories(categoryBean.getCategoryList(resData));
+                    resData.close();
 
-                        if (cs.getMoreResults()) {
-                            //Get instruction list
-                            resData = cs.getResultSet();
-                            while (resData.next()) {
-                                instructionList.add(resData.getString("instruction_text"));
-                            }
-                            recipeBuilder.setInstructions(instructionList);
-                            resData.close();
-                        }
-                    }
+                    resData = cs.getResultSet();
+                    recipeBuilder.setInstructions(instructionBean.getInstructionList(resData));
+                    resData.close();
                 }
                 recipeList.add(recipeBuilder.build());
             }
@@ -91,45 +80,12 @@ public class RecipeBean {
             stmt.setInt(1, recipe.getWriterId());
             stmt.setBlob(2, recipe.getImage());
             stmt.setString(3, recipe.getInformation());
-            //TODO metod som fixar stats id
+            ingredientBean.addIngredientList(recipe.getId(), recipe.getIngredients());
+            categoryBean.addCategoryList(recipe.getId(), recipe.getCategories());
+            instructionBean.addInstructionList(recipe.getId(), recipe.getInstructions());
         } catch (Exception e) {
             LOGGER.error("Error in RecipeBean.addRecipe: " + e.getMessage());
         }
-        return 0;
-    }
-
-    private void addIngredientList(int id, List<Ingredient> ingredientList) {
-        try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("SELECT addIngredient(?)");//Lägg till ingrediens via function som returnerar 1 om den lyckades 0 om fail
-            for (Ingredient ingredient : ingredientList) {
-                stmt.setString(1, ingredient.getName());
-                stmt.executeQuery();
-                mapIngredientToRecipe(id, ingredient);
-            }
-        } catch (Exception e) {
-            LOGGER.error("Error in RecipeBean.addIngredientList: " + e.getMessage());
-        }
-    }
-
-    private int mapIngredientToRecipe(int id, Ingredient ingredient) {
-        try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO ingredient_recipe VALUES(?, ?, ?, ?)");
-            stmt.setInt(1, id);
-            stmt.setString(2, ingredient.getName());
-            stmt.setInt(3, ingredient.getAmount());
-            stmt.setString(4, ingredient.getMessurment());
-            return stmt.executeUpdate();
-        } catch (Exception e) {
-            LOGGER.error("Error in RecipeBean.addIngredientList: " + e.getMessage());
-        }
-        return 0;
-    }
-
-    private int addCommentList(int id, List<Comment> commentList) {
-        return 0;
-    }
-
-    private int addCategoryList(int id, List<String> categoryList) {
         return 0;
     }
 

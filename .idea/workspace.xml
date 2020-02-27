@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="fullstack_slutprojekt:war" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="3eac87e9-b39f-4028-84d0-da76a2e7576f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/CategoryBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/IngredientBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/InstructionBean.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/RecipeBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/RecipeBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/Recipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/Recipe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/RecipeBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/RecipeBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/resources/RecipeResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/resources/RecipeResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/nu/te4/fullstack_slutprojekt/beans/AuthenticationBeanTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/nu/te4/fullstack_slutprojekt/beans/BeansSuite.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/nu/te4/fullstack_slutprojekt/beans/CommentBeanTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/nu/te4/fullstack_slutprojekt/beans/RecipeBeanTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/nu/te4/fullstack_slutprojekt/resources/AuthenticationResourceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/nu/te4/fullstack_slutprojekt/resources/CommentResourceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/nu/te4/fullstack_slutprojekt/resources/RecipeResourceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/nu/te4/fullstack_slutprojekt/resources/ResourcesSuite.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,10 +48,146 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../bowling-kata" />
   </component>
-  <component name="RunManager" selected="JUnit.RecipeBuilderTest">
-    <configuration name="CommentBuilderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JBoss Server.fullstack_projekt">
+    <configuration default="true" type="JBossConfiguration" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
+      <deployment />
+      <server-settings>
+        <option name="SERVER" value="" />
+        <option name="BINDING_SET_NAME" value="" />
+        <option name="DOMAIN" value="false" />
+        <option name="SERVER_GROUP" value="" />
+        <option name="USERNAME" value="" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="JBoss" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="65216" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="fullstack_projekt" type="JBossConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="JBoss 18.0.1.Final" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/fullstack" />
+      <option name="BROWSER_ID" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="fullstack_slutprojekt:war">
+          <settings />
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="SERVER" />
+        <option name="BINDING_SET_NAME" value="" />
+        <option name="DOMAIN" value="false" />
+        <option name="SERVER_GROUP" value="main-server-group" />
+        <option name="USERNAME" value="admin" />
+        <option name="CREDENTIAL_ALIAS" value="a1a85601-0c57-43f1-9a2b-6c91eb51f0d8" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="JBoss" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="65216" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="RunConfigurationTask" enabled="true" run_configuration_name="nu.te4.fullstack_slutprojekt.entities in fullstack_slutprojekt" run_configuration_type="JUnit" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="fullstack_slutprojekt:war" />
+        </option>
+      </method>
+    </configuration>
+    <configuration name="CommentBuilderTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="fullstack_slutprojekt" />
       <extension name="coverage">
         <pattern>
@@ -67,10 +217,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="nu.te4.fullstack_slutprojekt.entities in fullstack_slutprojekt" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="fullstack_slutprojekt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="nu.te4.fullstack_slutprojekt.entities.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="nu.te4.fullstack_slutprojekt.entities" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JBoss Server.fullstack_projekt" />
+      <item itemvalue="JUnit.CommentBuilderTest" />
+      <item itemvalue="JUnit.nu.te4.fullstack_slutprojekt.entities in fullstack_slutprojekt" />
+      <item itemvalue="JUnit.RecipeBuilderTest" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.RecipeBuilderTest" />
-        <item itemvalue="JUnit.CommentBuilderTest" />
       </list>
     </recent_temporary>
   </component>
@@ -79,7 +248,17 @@
       <list>
         <serviceView>
           <treeState>
-            <expand />
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="JBoss Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="JBoss Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Running" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+            </expand>
             <select />
           </treeState>
         </serviceView>
@@ -104,6 +283,7 @@
       <workItem from="1582532616268" duration="13000" />
       <workItem from="1582533050494" duration="7110000" />
       <workItem from="1582713985865" duration="4221000" />
+      <workItem from="1582788125398" duration="6884000" />
     </task>
     <servers />
   </component>
@@ -115,6 +295,10 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="631" y="356" key="#All_in_fullstack_slutprojekt/0.0.2560.1440/-1920.247.1920.1080@0.0.2560.1440" timestamp="1581448973784" />
+    <state x="621" y="197" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582808859495">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state x="621" y="197" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582808859495" />
     <state x="599" y="268" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog" timestamp="1581578692293">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
@@ -123,36 +307,56 @@
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="765" y="297" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582538446500" />
+    <state x="756" y="440" width="426" height="288" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1582808123634">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state x="756" y="440" width="426" height="288" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582808123634" />
     <state x="690" y="328" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1581670738387">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="690" y="328" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1581670738387" />
-    <state x="740" y="336" key="FileChooserDialogImpl" timestamp="1582542591067">
+    <state x="740" y="336" key="FileChooserDialogImpl" timestamp="1582791499736">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="740" y="336" key="FileChooserDialogImpl/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582542591067" />
+    <state x="740" y="336" key="FileChooserDialogImpl/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582791499736" />
     <state x="987" y="417" key="FileChooserDialogImpl/0.0.2560.1440/-1920.247.1920.1080@0.0.2560.1440" timestamp="1581765151302" />
-    <state width="938" height="321" key="GridCell.Tab.0.bottom" timestamp="1581680234578">
+    <state width="636" height="321" key="GridCell.Tab.0.bottom" timestamp="1582809766888">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="938" height="321" key="GridCell.Tab.0.bottom/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1581680234578" />
-    <state width="938" height="321" key="GridCell.Tab.0.center" timestamp="1581680234578">
+    <state width="636" height="321" key="GridCell.Tab.0.bottom/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582809766888" />
+    <state width="636" height="321" key="GridCell.Tab.0.center" timestamp="1582809766888">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="938" height="321" key="GridCell.Tab.0.center/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1581680234578" />
-    <state width="938" height="321" key="GridCell.Tab.0.left" timestamp="1581680234578">
+    <state width="636" height="321" key="GridCell.Tab.0.center/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582809766888" />
+    <state width="636" height="321" key="GridCell.Tab.0.left" timestamp="1582809766888">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="938" height="321" key="GridCell.Tab.0.left/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1581680234578" />
-    <state width="938" height="321" key="GridCell.Tab.0.right" timestamp="1581680234578">
+    <state width="636" height="321" key="GridCell.Tab.0.left/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582809766888" />
+    <state width="636" height="321" key="GridCell.Tab.0.right" timestamp="1582809766888">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="938" height="321" key="GridCell.Tab.0.right/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1581680234578" />
-    <state x="732" y="437" key="com.intellij.ide.util.TipDialog" timestamp="1582532616977">
+    <state width="636" height="321" key="GridCell.Tab.0.right/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582809766888" />
+    <state x="732" y="437" key="com.intellij.ide.util.TipDialog" timestamp="1582788125208">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="732" y="437" key="com.intellij.ide.util.TipDialog/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582532616977" />
+    <state x="732" y="437" key="com.intellij.ide.util.TipDialog/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582788125208" />
     <state x="976" y="543" key="com.intellij.ide.util.TipDialog/0.0.2560.1440/-1920.247.1920.1080@0.0.2560.1440" timestamp="1581764916293" />
+    <state x="92" y="92" width="1736" height="976" key="dock-window-1" timestamp="1582808718950">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state x="92" y="92" width="1736" height="976" key="dock-window-1/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582808718950" />
+    <state x="92" y="92" width="1736" height="976" key="dock-window-2" timestamp="1582808718950">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state x="92" y="92" width="1736" height="976" key="dock-window-2/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582808718950" />
+    <state x="92" y="92" width="1736" height="976" key="dock-window-3" timestamp="1582808718950">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state x="92" y="92" width="1736" height="976" key="dock-window-3/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582808718950" />
+    <state x="92" y="92" width="1736" height="976" key="dock-window-4" timestamp="1582808718950">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state x="92" y="92" width="1736" height="976" key="dock-window-4/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582808718950" />
     <state x="623" y="255" width="672" height="678" key="search.everywhere.popup" timestamp="1582537154240">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
