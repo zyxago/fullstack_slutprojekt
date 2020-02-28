@@ -4,12 +4,14 @@ import nu.te4.fullstack_slutprojekt.ConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ejb.Stateless;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+@Stateless
 public class InstructionBean {
     private static final Logger LOGGER = LoggerFactory.getLogger(InstructionBean.class);
 

@@ -38,6 +38,21 @@ public class RecipeResource {
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
+    //TODO kom på en lösning för att skicka bild med http GET request
+    @GET
+    @Path("/recipe/{id}/img")
+    @Produces(MediaType.MULTIPART_FORM_DATA)//Kanske funkar
+    public Response getRecipeImg(){
+        return null;
+    }
+
+    @POST
+    @Path("/recipe/{id}/img")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response addImgToRecipe(){
+        return null;
+    }
+
     @POST
     @Path("/recipe")
     public Response addRecipe(Recipe recipe) {
@@ -68,12 +83,12 @@ public class RecipeResource {
     @PUT
     @Path("/recipe/{id}")
     public Response modifyRecipe(@PathParam("id") int id, Recipe recipe) {
-        return null;
+        return Response.ok().build();
     }
 
     @DELETE
     @Path("/recipe/{id}")
     public Response removeRecipe(@PathParam("id") int id) {
-        return null;
+        return Response.ok().build();
     }
 }

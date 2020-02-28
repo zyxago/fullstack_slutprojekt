@@ -31,6 +31,8 @@ public class RecipeBean {
     CategoryBean categoryBean;
     @EJB
     InstructionBean instructionBean;
+    @EJB
+    StatsBean statsBean;
 
     /**
      * @return
@@ -76,10 +78,10 @@ public class RecipeBean {
 
     public int addRecipe(Recipe recipe) {
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO recipe VALUES(null, ?, ?, ?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO recipe VALUES(null, ?, null, ?, ?)");
             stmt.setInt(1, recipe.getWriterId());
-            stmt.setBlob(2, recipe.getImage());
-            stmt.setString(3, recipe.getInformation());
+            stmt.setString(2, recipe.getInformation());
+            stmt.setInt(3, statsBean.insertStats());
             ingredientBean.addIngredientList(recipe.getId(), recipe.getIngredients());
             categoryBean.addCategoryList(recipe.getId(), recipe.getCategories());
             instructionBean.addInstructionList(recipe.getId(), recipe.getInstructions());
