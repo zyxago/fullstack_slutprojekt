@@ -1,9 +1,6 @@
 package nu.te4.fullstack_slutprojekt.beans;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -41,7 +38,7 @@ public class RecipeBean {
         LOGGER.debug("Getting recipes.");
         List<Recipe> recipeList = new ArrayList<>();
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM recipe");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM recipe_full");
             ResultSet data = stmt.executeQuery();
             CallableStatement cs = conn.prepareCall("CALL recipe_attached_data(?)");
             while (data.next()) {
@@ -58,11 +55,11 @@ public class RecipeBean {
                     ResultSet resData = cs.getResultSet();
                     recipeBuilder.setIngredients(ingredientBean.getIngredients(resData));
                     resData.close();
-
+                    cs.getMoreResults();
                     resData = cs.getResultSet();
                     recipeBuilder.setCategories(categoryBean.getCategoryList(resData));
                     resData.close();
-
+                    cs.getMoreResults();
                     resData = cs.getResultSet();
                     recipeBuilder.setInstructions(instructionBean.getInstructionList(resData));
                     resData.close();
@@ -78,17 +75,28 @@ public class RecipeBean {
 
     public int addRecipe(Recipe recipe) {
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO recipe VALUES(null, ?, null, ?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO recipe VALUES(null, ?, null, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, recipe.getWriterId());
             stmt.setString(2, recipe.getInformation());
             stmt.setInt(3, statsBean.insertStats());
-            ingredientBean.addIngredientList(recipe.getId(), recipe.getIngredients());
-            categoryBean.addCategoryList(recipe.getId(), recipe.getCategories());
-            instructionBean.addInstructionList(recipe.getId(), recipe.getInstructions());
+            if (stmt.executeUpdate() > 0) {
+                int recipeId = 0;
+                try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        recipeId = generatedKeys.getInt(1);
+                        ingredientBean.addIngredientList(recipeId, recipe.getIngredients());
+                        categoryBean.addCategoryList(recipeId, recipe.getCategories());
+                        instructionBean.addInstructionList(recipeId, recipe.getInstructions());
+                    } else {
+                        throw new Exception("Failed to get id of newly generated recipe");
+                    }
+                }
+            }
         } catch (Exception e) {
             LOGGER.error("Error in RecipeBean.addRecipe: " + e.getMessage());
+            return 0;
         }
-        return 0;
+        return 1;
     }
 
     public int modifyRecipe(int id, Recipe recipe) {

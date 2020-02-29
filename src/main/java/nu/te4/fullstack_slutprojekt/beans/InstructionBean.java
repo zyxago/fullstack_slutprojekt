@@ -24,7 +24,7 @@ public class InstructionBean {
         List<String> instructionList = new ArrayList<>();
         try {
             while (resData.next()) {
-                instructionList.add(resData.getString("instruction"));
+                instructionList.add(resData.getString("instruction_text"));
             }
         } catch (Exception e) {
             LOGGER.error("Error in InstructionBean.getInstructionList: " + e.getMessage());

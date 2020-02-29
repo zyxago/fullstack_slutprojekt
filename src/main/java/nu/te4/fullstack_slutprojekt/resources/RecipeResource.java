@@ -32,23 +32,22 @@ public class RecipeResource {
     @Path("/recipes")
     public Response getRecipes() {
         List<Recipe> recipes = recipeBean.getRecipes();
-        if(recipes.isEmpty()){
+        if(!recipes.isEmpty()){
             return Response.status(Response.Status.OK).entity(recipes).build();
         }
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
-    //TODO kom på en lösning för att skicka bild med http GET request
     @GET
     @Path("/recipe/{id}/img")
-    @Produces(MediaType.MULTIPART_FORM_DATA)//Kanske funkar
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public Response getRecipeImg(){
         return null;
     }
 
     @POST
     @Path("/recipe/{id}/img")
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Consumes(MediaType.APPLICATION_OCTET_STREAM)
     public Response addImgToRecipe(){
         return null;
     }
