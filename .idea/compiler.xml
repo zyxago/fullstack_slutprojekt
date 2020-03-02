@@ -15,7 +15,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="fullstack_slutprojekt" options="-endorseddirs C:\Users\Erik\Documents\Programmering\fullstack_slutprojekt\target/endorsed" />
+      <module name="fullstack_slutprojekt" options="-endorseddirs C:\Users\erikh\Documents\GitHub\fullstack_slutprojekt\target/endorsed" />
     </option>
   </component>
 </project>

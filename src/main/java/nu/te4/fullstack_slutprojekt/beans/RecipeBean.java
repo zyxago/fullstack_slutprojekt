@@ -1,10 +1,12 @@
 package nu.te4.fullstack_slutprojekt.beans;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.sql.rowset.serial.SerialBlob;
 
 import nu.te4.fullstack_slutprojekt.ConnectionFactory;
 import nu.te4.fullstack_slutprojekt.entities.Comment;
@@ -31,9 +33,6 @@ public class RecipeBean {
     @EJB
     StatsBean statsBean;
 
-    /**
-     * @return
-     */
     public List<Recipe> getRecipes() {
         LOGGER.debug("Getting recipes.");
         List<Recipe> recipeList = new ArrayList<>();
@@ -74,17 +73,31 @@ public class RecipeBean {
         return recipeList;
     }
 
+    public InputStream getImage(int id) {
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT img FROM recipe WHERE id = ?");
+            stmt.setInt(1, id);
+            ResultSet data = stmt.executeQuery();
+            if (data.next()) {
+                return data.getBlob("img").getBinaryStream();
+            }
+        } catch (Exception e) {
+            LOGGER.error("Error in RecipeBean.getImage: " + e.getMessage());
+        }
+        return null;
+    }
+
     public int addRecipe(Recipe recipe) {
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO recipe VALUES(null, ?, null, ?, ?)", Statement.RETURN_GENERATED_KEYS);
-            stmt.setInt(1, recipe.getWriterId());
-            stmt.setString(2, recipe.getInformation());
-            stmt.setInt(3, statsBean.insertStats());
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO recipe VALUES(null, ?, ?, null, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, recipe.getTitle());
+            stmt.setInt(2, recipe.getWriterId());
+            stmt.setString(3, recipe.getInformation());
+            stmt.setInt(4, statsBean.insertStats());
             if (stmt.executeUpdate() > 0) {
-                int recipeId = 0;
                 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
-                        recipeId = generatedKeys.getInt(1);
+                        int recipeId = generatedKeys.getInt(1);
                         ingredientBean.addIngredientList(recipeId, recipe.getIngredients());
                         categoryBean.addCategoryList(recipeId, recipe.getCategories());
                         instructionBean.addInstructionList(recipeId, recipe.getInstructions());
@@ -93,11 +106,11 @@ public class RecipeBean {
                     }
                 }
             }
+            return 1;
         } catch (Exception e) {
             LOGGER.error("Error in RecipeBean.addRecipe: " + e.getMessage());
-            return 0;
         }
-        return 1;
+        return 0;
     }
 
     public int modifyRecipe(int id, Recipe recipe) {
@@ -127,7 +140,25 @@ public class RecipeBean {
     }
 
     public int removeRecipe(int id) {
-        return 0;
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM recipe WHERE id = ?");
+            stmt.setInt(1, id);
+            return stmt.executeUpdate();
+        } catch (Exception e) {
+            LOGGER.error("Error in RecipeBean.addImage: " + e.getMessage());
+            return 0;
+        }
     }
 
+    public int addImage(int id, InputStream image) {
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE recipe SET img = ? WHERE id = ?");
+            stmt.setBlob(1, image);
+            stmt.setInt(2, id);
+            return stmt.executeUpdate();
+        } catch (Exception e) {
+            LOGGER.error("Error in RecipeBean.addImage: " + e.getMessage());
+            return 0;
+        }
+    }
 }

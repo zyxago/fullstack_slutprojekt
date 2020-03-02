@@ -15,6 +15,9 @@ import javax.ws.rs.core.Response;
 import nu.te4.fullstack_slutprojekt.beans.RecipeBean;
 import nu.te4.fullstack_slutprojekt.entities.Recipe;
 
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -32,7 +35,7 @@ public class RecipeResource {
     @Path("/recipes")
     public Response getRecipes() {
         List<Recipe> recipes = recipeBean.getRecipes();
-        if(!recipes.isEmpty()){
+        if (!recipes.isEmpty()) {
             return Response.status(Response.Status.OK).entity(recipes).build();
         }
         return Response.status(Response.Status.NO_CONTENT).build();
@@ -41,53 +44,66 @@ public class RecipeResource {
     @GET
     @Path("/recipe/{id}/img")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
-    public Response getRecipeImg(){
-        return null;
+    public Response getRecipeImg(@PathParam("id") int id) {
+        InputStream image = recipeBean.getImage(id);
+        if (image != null) {
+            return Response.status(Response.Status.OK).entity(image).build();
+        }
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 
-    @POST
+    @PUT
     @Path("/recipe/{id}/img")
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
-    public Response addImgToRecipe(){
-        return null;
+    public Response addImgToRecipe(@PathParam("id") int id, InputStream image) {
+        if (recipeBean.addImage(id, image) > 0) {
+            return Response.status(Response.Status.CREATED).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @POST
     @Path("/recipe")
     public Response addRecipe(Recipe recipe) {
-        if(recipeBean.addRecipe(recipe) > 0){
+        if (recipeBean.addRecipe(recipe) > 0) {
             return Response.status(Response.Status.CREATED).build();
         }
-        return  Response.status(Response.Status.BAD_REQUEST).build();
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
-    @POST
+    @PUT
     @Path("/recipe/repport/{id}")
     public Response repportRecipe(@PathParam("id") int id) {
-        if(recipeBean.repportRecipe(id) > 0){
+        if (recipeBean.repportRecipe(id) > 0) {
             return Response.status(Response.Status.OK).build();
         }
-        return  Response.status(Response.Status.BAD_REQUEST).build();
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
-    @POST
+    @PUT
     @Path("/recipe/like/{id}")
     public Response likeRecipe(@PathParam("id") int id) {
-        if(recipeBean.likeRecipe(id) > 0){
+        if (recipeBean.likeRecipe(id) > 0) {
             return Response.status(Response.Status.OK).build();
         }
-        return  Response.status(Response.Status.BAD_REQUEST).build();
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @PUT
     @Path("/recipe/{id}")
     public Response modifyRecipe(@PathParam("id") int id, Recipe recipe) {
-        return Response.ok().build();
+        if (recipeBean.modifyRecipe(id, recipe) > 0) {
+            return Response.status(Response.Status.OK).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @DELETE
     @Path("/recipe/{id}")
     public Response removeRecipe(@PathParam("id") int id) {
-        return Response.ok().build();
+        if (recipeBean.removeRecipe(id) > 0) {
+            return Response.status(Response.Status.OK).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 }
