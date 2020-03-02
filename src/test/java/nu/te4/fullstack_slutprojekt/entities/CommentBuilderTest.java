@@ -18,19 +18,14 @@ import static org.junit.Assert.*;
  */
 public class CommentBuilderTest {
 
+    private CommentBuilder instance;
+
     public CommentBuilderTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
     }
 
     @Before
     public void setUp() {
+        instance = new CommentBuilder();
     }
 
     @After
@@ -43,7 +38,6 @@ public class CommentBuilderTest {
     @Test
     public void testBuildNullText() {
         System.out.println("build:comment - NULL text");
-        CommentBuilder instance = new CommentBuilder();
         instance.setText(null);
         try {
             instance.build();
@@ -59,7 +53,6 @@ public class CommentBuilderTest {
     @Test
     public void testBuildNegativeWriterId() {
         System.out.println("build:comment - Negative Writer ID");
-        CommentBuilder instance = new CommentBuilder();
         instance.setWriterId(-1)
                 .setText("")
                 .build();
@@ -74,7 +67,6 @@ public class CommentBuilderTest {
     @Test
     public void testBuildNegativeId() {
         System.out.println("build:comment - Negative ID");
-        CommentBuilder instance = new CommentBuilder();
         instance
                 .setId(-1)
                 .setText("")

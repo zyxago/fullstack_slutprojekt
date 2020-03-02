@@ -21,19 +21,14 @@ import static org.junit.Assert.*;
  */
 public class RecipeBuilderTest {
 
+    private RecipeBuilder instance;
+
     public RecipeBuilderTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
     }
 
     @Before
     public void setUp() {
+        instance = new RecipeBuilder();
     }
 
     @After
@@ -46,7 +41,6 @@ public class RecipeBuilderTest {
     @Test
     public void testBuildNullCategories() {
         System.out.println("build:recipe - NULL categories");
-        RecipeBuilder instance = new RecipeBuilder();
         instance
                 .setIngredients(new ArrayList<>())
                 .setInstructions(new ArrayList<>())
@@ -66,7 +60,6 @@ public class RecipeBuilderTest {
     @Test
     public void testBuildNullInstructions() {
         System.out.println("build:recipe - NULL instructions");
-        RecipeBuilder instance = new RecipeBuilder();
         instance
                 .setIngredients(new ArrayList<>())
                 .setInstructions(null)
@@ -86,7 +79,6 @@ public class RecipeBuilderTest {
     @Test
     public void testBuildNullIngredients() {
         System.out.println("build:recipe - NULL ingredients");
-        RecipeBuilder instance = new RecipeBuilder();
         instance
                 .setIngredients(null)
                 .setInstructions(new ArrayList<>())
@@ -106,7 +98,6 @@ public class RecipeBuilderTest {
     @Test
     public void testBuildNegativeId() {
         System.out.println("build:recipe - Negative ID");
-        RecipeBuilder instance = new RecipeBuilder();
         instance
                 .setId(-1)
                 .setIngredients(new ArrayList<>())
@@ -125,7 +116,6 @@ public class RecipeBuilderTest {
     @Test
     public void testBuildNegativeWriterId() {
         System.out.println("build:recipe - Negative Writer ID");
-        RecipeBuilder instance = new RecipeBuilder();
         instance
                 .setWriterId(-1)
                 .setIngredients(new ArrayList<>())
@@ -136,5 +126,23 @@ public class RecipeBuilderTest {
         int expResult = 0;
         Recipe result = instance.build();
         assertEquals(expResult, result.getId());
+    }
+
+    /**
+     * Test of build method, of class RecipeBuilder. title == NULL
+     */
+    @Test
+    public void testBuildNullTitle() {
+        System.out.println("build:recipe - NULL Title");
+        instance
+                .setIngredients(new ArrayList<>())
+                .setInstructions(new ArrayList<>())
+                .setCategories(new ArrayList<>());
+        try {
+            instance.build();
+            fail("Did not throw IllegalStateException when Title was NULL.");
+        } catch (IllegalStateException e) {
+
+        }
     }
 }
