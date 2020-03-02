@@ -1,5 +1,6 @@
 import React from "react";
 import Recipe from "../entities/Recipe";
+import {Card, Content, Media} from "react-bulma-components";
 
 /**
  *
@@ -7,19 +8,24 @@ import Recipe from "../entities/Recipe";
  * @returns {*}
  */
 export function RecipeFullView(recipe) {
-    //TEMP
     return (
-        <div>
-            <ul>
-                <li>name of recipe here</li>
-                <li>likes: ${recipe.likes}</li>
-                <li>repports: ${recipe.repports}</li>
-                <li>info here: ${recipe.information}</li>
-                <li>image here: ${recipe.image}</li>
-                <li>ingredients: ${recipe.ingredients}</li>{/*make react component for ingredients*/}
-                <li>categories: ${recipe.categories}</li>
-            </ul>
-        </div>
+        <Card>
+            <Card.Content>
+                <Media>
+                    <Media.Item>
+                        {recipe.image}
+                    </Media.Item>
+                </Media>
+                <Content>
+                    <div>name of recipe here: {recipe.title}</div>
+                    <div>categories: {recipe.categories}</div>
+                    <div>likes: {recipe.likes}</div>
+                    <div>repports: {recipe.repports}</div>
+                    <div>info here: {recipe.information}</div>
+                    <div>ingredients: {recipe.ingredients}</div>{/*make react component for ingredients*/}
+                </Content>
+            </Card.Content>
+        </Card>
     )
 }
 
@@ -29,14 +35,19 @@ export function RecipeFullView(recipe) {
  * @returns {*}
  */
 export function RecipeBriefView(recipe) {
-    //TEMP
     return (
-        <div>
-            <ul>
-                <li>name of recipe here</li>
-                <li>image here: ${recipe.image}</li>
-                <li>categories: ${recipe.categories}</li>
-            </ul>
-        </div>
+        <Card>
+            <Card.Content>
+                <Media>
+                    <Media.Item>
+                        {recipe.image}
+                    </Media.Item>
+                </Media>
+                <Content>
+                    <div>name of recipe here: {recipe.title}</div>
+                    <div>categories: {recipe.categories}</div>
+                </Content>
+            </Card.Content>
+        </Card>
     )
 }

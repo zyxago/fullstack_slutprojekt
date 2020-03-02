@@ -50,6 +50,7 @@ public class RecipeBuilderTest {
         instance
                 .setIngredients(new ArrayList<>())
                 .setInstructions(new ArrayList<>())
+                .setTitle("")
                 .setCategories(null);
         try {
             instance.build();
@@ -69,6 +70,7 @@ public class RecipeBuilderTest {
         instance
                 .setIngredients(new ArrayList<>())
                 .setInstructions(null)
+                .setTitle("")
                 .setCategories(new ArrayList<>());
         try {
             instance.build();
@@ -88,6 +90,7 @@ public class RecipeBuilderTest {
         instance
                 .setIngredients(null)
                 .setInstructions(new ArrayList<>())
+                .setTitle("")
                 .setCategories(new ArrayList<>());
         try {
             instance.build();
@@ -109,6 +112,7 @@ public class RecipeBuilderTest {
                 .setIngredients(new ArrayList<>())
                 .setInstructions(new ArrayList<>())
                 .setCategories(new ArrayList<>())
+                .setTitle("")
                 .build();
         int expResult = 0;
         Recipe result = instance.build();
@@ -126,6 +130,7 @@ public class RecipeBuilderTest {
                 .setWriterId(-1)
                 .setIngredients(new ArrayList<>())
                 .setInstructions(new ArrayList<>())
+                .setTitle("")
                 .setCategories(new ArrayList<>())
                 .build();
         int expResult = 0;

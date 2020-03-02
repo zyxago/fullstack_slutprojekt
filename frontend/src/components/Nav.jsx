@@ -9,7 +9,7 @@ export default function Nav(props){
             <Navbar.Menu className="is-active">
                 <Navbar.Container position="end">
                     <Navbar.Item>
-                        <Link to="/postRecipe">Post Recipe</Link>
+                        <Link to={`${props.mainPath}/postRecipe`}>Post Recipe</Link>
                     </Navbar.Item>
                     {props.authorized ?
                         <Navbar.Item>

@@ -3,13 +3,15 @@ import {getRecipes} from "../resources/api/recipe";
 import {RecipeBriefView} from "./Recipe";
 
 export default function RecipeTable() {
-
+    console.log("Recipe table");
     const [recipeList, setRecipeList] = React.useState([]);
-    React.useEffect(()=>{getRecipes(setRecipeList)}, []);//websocket dependency here maybe
+    React.useEffect(() => {
+        getRecipes(setRecipeList)
+    }, []);//websocket dependency here maybe
 
-    function populateTable(recipeList){
+    function populateTable(recipeList) {
         const htmlRecipes = [];
-        for(const recipe of recipeList){
+        for (const recipe of recipeList) {
             htmlRecipes.push(RecipeBriefView(recipe))
         }
         return htmlRecipes;
@@ -17,7 +19,9 @@ export default function RecipeTable() {
 
     return (
         <div>
-            {populateTable(recipeList)}
+            <ul>
+                {populateTable(recipeList)}
+            </ul>
         </div>
     );
 }

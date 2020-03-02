@@ -14,7 +14,6 @@ import java.util.List;
 
 @Stateless
 public class IngredientBean {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(IngredientBean.class);
 
     /**
@@ -37,20 +36,6 @@ public class IngredientBean {
         return ingredientList;
     }
 
-    private int mapIngredientToRecipe(int id, Ingredient ingredient) {
-        try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO ingredient_recipe VALUES(?, ?, ?, ?)");
-            stmt.setInt(1, id);
-            stmt.setString(2, ingredient.getName());
-            stmt.setInt(3, ingredient.getAmount());
-            stmt.setString(4, ingredient.getMessurment());
-            return stmt.executeUpdate();
-        } catch (Exception e) {
-            LOGGER.error("Error in IngredientBean.addIngredientList: " + e.getMessage());
-        }
-        return 0;
-    }
-
     /**
      *
      * @param id
@@ -58,11 +43,13 @@ public class IngredientBean {
      */
     public void addIngredientList(int id, List<Ingredient> ingredientList) {
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("SELECT addIngredient(?)");//Lägg till ingrediens via function som returnerar 1 om den lyckades 0 om fail
+            PreparedStatement stmt = conn.prepareStatement("SELECT addIngredient(?, ?, ?, ?)");
             for (Ingredient ingredient : ingredientList) {
-                stmt.setString(1, ingredient.getName());
+                stmt.setInt(1, id);
+                stmt.setString(2, ingredient.getName());
+                stmt.setInt(3, ingredient.getAmount());
+                stmt.setString(4, ingredient.getMessurment());
                 stmt.executeQuery();
-                mapIngredientToRecipe(id, ingredient);
             }
         } catch (Exception e) {
             LOGGER.error("Error in RecipeBean.addIngredientList: " + e.getMessage());

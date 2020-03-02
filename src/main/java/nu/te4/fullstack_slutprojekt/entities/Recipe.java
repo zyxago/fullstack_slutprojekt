@@ -14,6 +14,7 @@ import java.util.List;
 public class Recipe extends Post {
     private Blob image;
     private String information;
+    private String title;
     private List<String> instructions;
     private List<Ingredient> ingredients;
     private List<String> categories;
@@ -21,6 +22,7 @@ public class Recipe extends Post {
     public Recipe(RecipeBuilder builder) {
         super(builder.getId(), builder.getLikes(), builder.getRepports(), builder.getWriterId());
         this.image = builder.getImage();
+        this.title = builder.getTitle();
         this.information = builder.getInformation();
         this.instructions = builder.getInstructions();
         this.ingredients = builder.getIngredients();
@@ -67,5 +69,13 @@ public class Recipe extends Post {
 
     public void setCategories(List<String> categories) {
         this.categories = categories;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

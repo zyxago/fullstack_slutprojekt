@@ -32,20 +32,6 @@ public class InstructionBean {
         return instructionList;
     }
 
-    private int mapInstructionToRecipe(int recipeId, String instruction, int instructionId, int order) {
-        try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO instruction_recipe VALUES(?, ?, ?, ?)");
-            stmt.setInt(1, instructionId);
-            stmt.setInt(2, recipeId);
-            stmt.setInt(3, order);
-            stmt.setString(4, instruction);
-            return stmt.executeUpdate();
-        } catch (Exception e) {
-            LOGGER.error("Error in InstructionBean.mapInstructionToRecipe: " + e.getMessage());
-        }
-        return 0;
-    }
-
     /**
      *
      * @param id
@@ -53,13 +39,12 @@ public class InstructionBean {
      */
     public void addInstructionList(int id, List<String> instructionList) {
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("SELECT addInstruction(?)");
+            PreparedStatement stmt = conn.prepareStatement("SELECT addInstruction(?, ?, ?)");
             for (String instruction : instructionList) {
-                stmt.setString(1, instruction);
-                ResultSet data = stmt.executeQuery();
-                if (data.next()) {
-                    mapInstructionToRecipe(id, instruction, data.getInt(1), instructionList.indexOf(instruction));
-                }
+                stmt.setInt(1, id);
+                stmt.setInt(2, instructionList.indexOf(instruction));
+                stmt.setString(3, instruction);
+                stmt.executeQuery();
             }
         } catch (Exception e) {
             LOGGER.error("Error in InstructionBean.addInstructionList: " + e.getMessage());

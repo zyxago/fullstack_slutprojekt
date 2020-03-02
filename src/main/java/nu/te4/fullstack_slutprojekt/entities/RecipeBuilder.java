@@ -9,6 +9,7 @@ public class RecipeBuilder {
     private List<String> instructions;
     private List<Ingredient> ingredients;
     private List<String> categories;
+    private String title;
     private int id;
     private int likes;
     private int repports;
@@ -29,6 +30,9 @@ public class RecipeBuilder {
         }
         if (getInstructions() == null) {
             throw new IllegalStateException("A recipe must have instructions");
+        }
+        if (getTitle() == null) {//TODO fixa junit test till denna
+            throw new IllegalStateException("A recipe must have a title");
         }
         if (getIngredients() == null) {
             throw new IllegalStateException("A recipe must have ingredients");
@@ -117,6 +121,15 @@ public class RecipeBuilder {
 
     public RecipeBuilder setWriterId(int writerId) {
         this.writerId = writerId;
+        return this;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public RecipeBuilder setTitle(String title) {
+        this.title = title;
         return this;
     }
 }

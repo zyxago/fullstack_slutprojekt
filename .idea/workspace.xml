@@ -7,13 +7,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3eac87e9-b39f-4028-84d0-da76a2e7576f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/Recipe.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/entities/Comment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/entities/Recipe.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/resources/api/comment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/resources/api/recipe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Nav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Nav.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Recipe.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Recipe.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/RecipeTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RecipeTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/entities/Recipe.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/Recipe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/resources/api/recipe.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/resources/api/recipe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fullstack_slutprojekt.iml" beforeDir="false" afterPath="$PROJECT_DIR$/fullstack_slutprojekt.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/CategoryBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/CategoryBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/IngredientBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/IngredientBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/InstructionBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/InstructionBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/RecipeBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/RecipeBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/Recipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/Recipe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/RecipeBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/RecipeBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/nu/te4/fullstack_slutprojekt/entities/RecipeBuilderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/nu/te4/fullstack_slutprojekt/entities/RecipeBuilderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +53,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../propertiesTesting" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -184,6 +196,14 @@
         </option>
       </method>
     </configuration>
+    <configuration name="All in fullstack_slutprojekt" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fullstack_slutprojekt" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CommentBuilderTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="fullstack_slutprojekt" />
       <extension name="coverage">
@@ -233,9 +253,11 @@
       <item itemvalue="JUnit.CommentBuilderTest" />
       <item itemvalue="JUnit.nu.te4.fullstack_slutprojekt.entities in fullstack_slutprojekt" />
       <item itemvalue="JUnit.RecipeBuilderTest" />
+      <item itemvalue="JUnit.All in fullstack_slutprojekt" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in fullstack_slutprojekt" />
         <item itemvalue="JUnit.RecipeBuilderTest" />
       </list>
     </recent_temporary>
@@ -254,7 +276,7 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="JBoss Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Finished" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Running" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
             </expand>
             <select />
@@ -285,6 +307,8 @@
       <workItem from="1582876500877" duration="12275000" />
       <workItem from="1582981942749" duration="4635000" />
       <workItem from="1583064451879" duration="780000" />
+      <workItem from="1583133026900" duration="112000" />
+      <workItem from="1583133245764" duration="10619000" />
     </task>
     <servers />
   </component>
@@ -304,10 +328,10 @@
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="599" y="268" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1581578692293" />
-    <state x="765" y="297" key="#com.intellij.ide.util.MemberChooser" timestamp="1582538446500">
+    <state x="765" y="297" key="#com.intellij.ide.util.MemberChooser" timestamp="1583145320081">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="765" y="297" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582538446500" />
+    <state x="765" y="297" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583145320081" />
     <state x="756" y="440" width="426" height="288" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1582808123634">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
@@ -316,39 +340,39 @@
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="690" y="328" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1581670738387" />
-    <state x="740" y="336" key="FileChooserDialogImpl" timestamp="1582791499736">
+    <state x="740" y="336" key="FileChooserDialogImpl" timestamp="1583135743286">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="740" y="336" key="FileChooserDialogImpl/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582791499736" />
+    <state x="740" y="336" key="FileChooserDialogImpl/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583135743286" />
     <state x="987" y="417" key="FileChooserDialogImpl/0.0.2560.1440/-1920.247.1920.1080@0.0.2560.1440" timestamp="1581765151302" />
-    <state width="1964" height="414" key="GridCell.Tab.0.bottom" timestamp="1583065239052">
-      <screen x="0" y="0" width="2560" height="1440" />
+    <state width="1182" height="381" key="GridCell.Tab.0.bottom" timestamp="1583147192746">
+      <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1204" height="381" key="GridCell.Tab.0.bottom/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582895369362" />
+    <state width="1182" height="381" key="GridCell.Tab.0.bottom/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583147192746" />
     <state width="1964" height="414" key="GridCell.Tab.0.bottom/0.0.2560.1440/-1920.247.1920.1080@0.0.2560.1440" timestamp="1583065239052" />
-    <state width="1964" height="414" key="GridCell.Tab.0.center" timestamp="1583065239052">
-      <screen x="0" y="0" width="2560" height="1440" />
+    <state width="1182" height="381" key="GridCell.Tab.0.center" timestamp="1583147192746">
+      <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1204" height="381" key="GridCell.Tab.0.center/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582895369362" />
+    <state width="1182" height="381" key="GridCell.Tab.0.center/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583147192746" />
     <state width="1964" height="414" key="GridCell.Tab.0.center/0.0.2560.1440/-1920.247.1920.1080@0.0.2560.1440" timestamp="1583065239052" />
-    <state width="1964" height="414" key="GridCell.Tab.0.left" timestamp="1583065239052">
-      <screen x="0" y="0" width="2560" height="1440" />
+    <state width="1182" height="381" key="GridCell.Tab.0.left" timestamp="1583147192746">
+      <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1204" height="381" key="GridCell.Tab.0.left/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582895369362" />
+    <state width="1182" height="381" key="GridCell.Tab.0.left/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583147192746" />
     <state width="1964" height="414" key="GridCell.Tab.0.left/0.0.2560.1440/-1920.247.1920.1080@0.0.2560.1440" timestamp="1583065239052" />
-    <state width="1964" height="414" key="GridCell.Tab.0.right" timestamp="1583065239052">
-      <screen x="0" y="0" width="2560" height="1440" />
+    <state width="1182" height="381" key="GridCell.Tab.0.right" timestamp="1583147192746">
+      <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1204" height="381" key="GridCell.Tab.0.right/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582895369362" />
+    <state width="1182" height="381" key="GridCell.Tab.0.right/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583147192746" />
     <state width="1964" height="414" key="GridCell.Tab.0.right/0.0.2560.1440/-1920.247.1920.1080@0.0.2560.1440" timestamp="1583065239052" />
     <state x="440" y="155" key="SettingsEditor" timestamp="1582888458329">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="440" y="155" key="SettingsEditor/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582888458329" />
-    <state x="976" y="543" key="com.intellij.ide.util.TipDialog" timestamp="1583064458569">
-      <screen x="0" y="0" width="2560" height="1440" />
+    <state x="732" y="437" key="com.intellij.ide.util.TipDialog" timestamp="1583133251490">
+      <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="732" y="437" key="com.intellij.ide.util.TipDialog/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1582876504939" />
+    <state x="732" y="437" key="com.intellij.ide.util.TipDialog/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583133251490" />
     <state x="976" y="543" key="com.intellij.ide.util.TipDialog/0.0.2560.1440/-1920.247.1920.1080@0.0.2560.1440" timestamp="1583064458569" />
     <state x="92" y="92" width="1736" height="976" key="dock-window-1" timestamp="1582808718950">
       <screen x="0" y="0" width="1920" height="1160" />

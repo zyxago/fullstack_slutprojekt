@@ -6,7 +6,7 @@ import Recipe from "../../entities/Recipe";
  * @returns {Promise<void>}
  */
 export async function getRecipes(setRecipeList) {
-    const result = await fetch(`http://127.0.0.1:8080/fullstack_slutprojekt-1.0/api/recipes`);
+    const result = await fetch("api/recipes");
     const data = await result.json();
     const recipes = [];
     if (data) {
@@ -14,7 +14,6 @@ export async function getRecipes(setRecipeList) {
             recipes.push(new Recipe(recipeData))
         }
     }
-    console.log("Recipes: " + recipes);
     setRecipeList(recipes);
 }
 
@@ -25,9 +24,8 @@ export async function getRecipes(setRecipeList) {
  * @returns {Promise<void>}
  */
 export async function getRecipeImage(id, setRecipeImage) {
-    const result = await fetch(`${window.location.host}/api/recipe/${id}/image`);
+    const result = await fetch("api/image");
     const data = await result.blob();
-    console.log(data);
     setRecipeImage(data);
 }
 
@@ -37,12 +35,11 @@ export async function getRecipeImage(id, setRecipeImage) {
  * @returns {Promise<void>}
  */
 export async function postRecipe(recipe) {
-    const result = await fetch(`${window.location.host}/api/recipe`, {
+    const result = await fetch("api/recipe", {
         method: "POST",
         body: JSON.stringify(recipe)
     });
     const response = result.status;
-    console.log("Response: " + response);
 }
 
 /**
@@ -52,10 +49,9 @@ export async function postRecipe(recipe) {
  * @returns {Promise<void>}
  */
 export async function postRecipeImage(id, image) {
-    const result = await fetch(`${window.location.host}/api/recipe/${id}/image`, {
+    const result = await fetch("api/image", {
         method: "POST",
         body: image
     });
     const response = result.status;
-    console.log("Response: " + response);
 }

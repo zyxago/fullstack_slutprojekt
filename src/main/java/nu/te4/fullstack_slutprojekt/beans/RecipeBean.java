@@ -48,7 +48,8 @@ public class RecipeBean {
                         .setImage(data.getBlob("img"))
                         .setLikes(data.getInt("likes"))
                         .setRepports(data.getInt("repports"))
-                        .setInformation(data.getString("info"));
+                        .setInformation(data.getString("info"))
+                        .setTitle(data.getString("title"));
 
                 cs.setInt(1, data.getInt("id"));
                 if (cs.execute()) {

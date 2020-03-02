@@ -9,5 +9,6 @@ export default class Recipe {
         this.ingredients = recipeData.ingredients;
         this.likes = recipeData.likes;
         this.repports = recipeData.repports;
+        this.title = recipeData.title;
     }
 }

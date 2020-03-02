@@ -33,18 +33,6 @@ public class CategoryBean {
         return categoryList;
     }
 
-    private int mapCategoryToRecipe(int id, String category) {
-        try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO category_recipe VALUES(?, ?)");
-            stmt.setInt(1, id);
-            stmt.setString(2, category);
-            return stmt.executeUpdate();
-        } catch (Exception e) {
-            LOGGER.error("Error in CategoryBean.mapCategoryToRecipe: " + e.getMessage());
-        }
-        return 0;
-    }
-
     /**
      *
      * @param id
@@ -52,11 +40,11 @@ public class CategoryBean {
      */
     public void addCategoryList(int id, List<String> categoryList) {
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("SELECT addCategory(?)");
+            PreparedStatement stmt = conn.prepareStatement("SELECT addCategory(?, ?)");
             for (String category : categoryList) {
                 stmt.setString(1, category);
+                stmt.setInt(2, id);
                 stmt.executeQuery();
-                mapCategoryToRecipe(id, category);
             }
         } catch (Exception e) {
             LOGGER.error("Error in CategoryBean.addCategoryList: " + e.getMessage());
