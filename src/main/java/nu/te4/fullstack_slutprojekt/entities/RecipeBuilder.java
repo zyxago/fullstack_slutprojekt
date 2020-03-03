@@ -31,7 +31,7 @@ public class RecipeBuilder {
         if (getInstructions() == null) {
             throw new IllegalStateException("A recipe must have instructions");
         }
-        if (getTitle() == null) {//TODO fixa junit test till denna
+        if (getTitle() == null) {
             throw new IllegalStateException("A recipe must have a title");
         }
         if (getIngredients() == null) {
