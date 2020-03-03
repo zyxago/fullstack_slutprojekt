@@ -17,7 +17,6 @@ public class CategoryBean {
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryBean.class);
 
     /**
-     *
      * @param resData
      * @return
      */
@@ -34,7 +33,6 @@ public class CategoryBean {
     }
 
     /**
-     *
      * @param id
      * @param categoryList
      */
@@ -48,6 +46,22 @@ public class CategoryBean {
             }
         } catch (Exception e) {
             LOGGER.error("Error in CategoryBean.addCategoryList: " + e.getMessage());
+        }
+    }
+
+    /**
+     *
+     * @param id
+     * @param categories
+     */
+    public void updateCategoryList(int id, List<String> categories) {
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM category_recipe WHERE recipe_id = ?");
+            stmt.setInt(1, id);
+            stmt.executeQuery();
+            addCategoryList(id, categories);
+        } catch (Exception e) {
+            LOGGER.error("Error in CategoryBean.updateCategoryList: " + e.getMessage());
         }
     }
 }

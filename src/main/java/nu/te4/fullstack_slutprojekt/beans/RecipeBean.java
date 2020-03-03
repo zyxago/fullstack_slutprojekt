@@ -44,7 +44,6 @@ public class RecipeBean {
                 RecipeBuilder recipeBuilder = new RecipeBuilder()
                         .setId(data.getInt("id"))
                         .setWriterId(data.getInt("writer_id"))
-                        .setImage(data.getBlob("img"))
                         .setLikes(data.getInt("likes"))
                         .setRepports(data.getInt("repports"))
                         .setInformation(data.getString("info"))
@@ -113,7 +112,18 @@ public class RecipeBean {
         return 0;
     }
 
-    public int modifyRecipe(int id, Recipe recipe) {
+    public int modifyRecipe(Recipe recipe) {
+        try(Connection conn = new ConnectionFactory().getConnection()){
+            PreparedStatement stmt = conn.prepareStatement("UPDATE recipe SET title = ?, info = ? WHERE id = ?");
+            stmt.setString(1, recipe.getTitle());
+            stmt.setString(2, recipe.getInformation());
+            stmt.setInt(3, recipe.getId());
+            instructionBean.updateInstructionList(recipe.getId(), recipe.getInstructions());
+            ingredientBean.updateIngredientList(recipe.getId(), recipe.getIngredients());
+            categoryBean.updateCategoryList(recipe.getId(), recipe.getCategories());
+        } catch (Exception e){
+            LOGGER.error("Error in RecipeBean.modifyRecipe: " + e.getMessage());
+        }
         return 0;
     }
 

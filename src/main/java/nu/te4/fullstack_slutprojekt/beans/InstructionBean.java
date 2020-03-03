@@ -50,4 +50,18 @@ public class InstructionBean {
             LOGGER.error("Error in InstructionBean.addInstructionList: " + e.getMessage());
         }
     }
+
+    public void updateInstructionList(int id, List<String> instructions) {
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE instruction_recipe SET instruction_order = ?, instruction_text = ? WHERE recipe_id = ?");
+            for(String instruction : instructions){
+                stmt.setInt(1, instructions.indexOf(instruction));
+                stmt.setString(2, instruction);
+                stmt.setInt(3, id);
+                stmt.executeUpdate();
+            }
+        } catch (Exception e) {
+            LOGGER.error("Error in InstructionBean.updateInstructionList: " + e.getMessage());
+        }
+    }
 }

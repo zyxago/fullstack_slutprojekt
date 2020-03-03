@@ -17,7 +17,6 @@ public class IngredientBean {
     private static final Logger LOGGER = LoggerFactory.getLogger(IngredientBean.class);
 
     /**
-     *
      * @param resData
      * @return
      */
@@ -28,7 +27,7 @@ public class IngredientBean {
                 ingredientList.add(new Ingredient(
                         resData.getString("ingredient"),
                         resData.getInt("amount"),
-                        resData.getString("messurment")));
+                        resData.getString("measurement")));
             }
         } catch (Exception e) {
             LOGGER.error("Error in IngredientBean.getIngredients: " + e.getMessage());
@@ -37,7 +36,6 @@ public class IngredientBean {
     }
 
     /**
-     *
      * @param id
      * @param ingredientList
      */
@@ -48,11 +46,27 @@ public class IngredientBean {
                 stmt.setInt(1, id);
                 stmt.setString(2, ingredient.getName());
                 stmt.setInt(3, ingredient.getAmount());
-                stmt.setString(4, ingredient.getMessurment());
+                stmt.setString(4, ingredient.getMeasurement());
                 stmt.executeQuery();
             }
         } catch (Exception e) {
             LOGGER.error("Error in RecipeBean.addIngredientList: " + e.getMessage());
+        }
+    }
+
+    /**
+     *
+     * @param id
+     * @param ingredientList
+     */
+    public void updateIngredientList(int id, List<Ingredient> ingredientList) {
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM ingredient_recipe WHERE recipe_id = ?");
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            addIngredientList(id, ingredientList);
+        } catch (Exception e) {
+            LOGGER.error("Error in RecipeBean.updateIngredientList: " + e.getMessage());
         }
     }
 }

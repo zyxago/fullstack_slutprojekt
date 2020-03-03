@@ -41,6 +41,24 @@ public class RecipeResource {
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
+    @POST
+    @Path("/recipe")
+    public Response addRecipe(Recipe recipe) {
+        if (recipeBean.addRecipe(recipe) > 0) {
+            return Response.status(Response.Status.CREATED).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
+    }
+
+    @PUT
+    @Path("/recipe")
+    public Response modifyRecipe(Recipe recipe) {
+        if (recipeBean.modifyRecipe(recipe) > 0) {
+            return Response.status(Response.Status.OK).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
+    }
+
     @GET
     @Path("/recipe/{id}/img")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
@@ -62,15 +80,6 @@ public class RecipeResource {
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
-    @POST
-    @Path("/recipe")
-    public Response addRecipe(Recipe recipe) {
-        if (recipeBean.addRecipe(recipe) > 0) {
-            return Response.status(Response.Status.CREATED).build();
-        }
-        return Response.status(Response.Status.BAD_REQUEST).build();
-    }
-
     @PUT
     @Path("/recipe/repport/{id}")
     public Response repportRecipe(@PathParam("id") int id) {
@@ -84,15 +93,6 @@ public class RecipeResource {
     @Path("/recipe/like/{id}")
     public Response likeRecipe(@PathParam("id") int id) {
         if (recipeBean.likeRecipe(id) > 0) {
-            return Response.status(Response.Status.OK).build();
-        }
-        return Response.status(Response.Status.BAD_REQUEST).build();
-    }
-
-    @PUT
-    @Path("/recipe/{id}")
-    public Response modifyRecipe(@PathParam("id") int id, Recipe recipe) {
-        if (recipeBean.modifyRecipe(id, recipe) > 0) {
             return Response.status(Response.Status.OK).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();

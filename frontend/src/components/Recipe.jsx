@@ -40,7 +40,7 @@ export function RecipeBriefView(recipe) {
             <Card.Content>
                 <Media>
                     <Media.Item>
-                        {recipe.image}
+                        <img src={recipe.image} href={"No image found"}/>
                     </Media.Item>
                 </Media>
                 <Content>

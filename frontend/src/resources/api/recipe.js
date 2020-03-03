@@ -11,7 +11,9 @@ export async function getRecipes(setRecipeList) {
     const recipes = [];
     if (data) {
         for (const recipeData of data) {
-            recipes.push(new Recipe(recipeData))
+            let recipe = new Recipe(recipeData);
+            await getRecipeImage(recipeData.id, (img)=>{recipe.image = img});
+            recipes.push(recipe)
         }
     }
     setRecipeList(recipes);
@@ -24,9 +26,9 @@ export async function getRecipes(setRecipeList) {
  * @returns {Promise<void>}
  */
 export async function getRecipeImage(id, setRecipeImage) {
-    const result = await fetch("api/image");
+    const result = await fetch(`api/recipe/${id}/img`);
     const data = await result.blob();
-    setRecipeImage(data);
+    setRecipeImage(URL.createObjectURL(data));
 }
 
 /**

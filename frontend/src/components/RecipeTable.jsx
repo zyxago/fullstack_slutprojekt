@@ -3,7 +3,6 @@ import {getRecipes} from "../resources/api/recipe";
 import {RecipeBriefView} from "./Recipe";
 
 export default function RecipeTable() {
-    console.log("Recipe table");
     const [recipeList, setRecipeList] = React.useState([]);
     React.useEffect(() => {
         getRecipes(setRecipeList)
