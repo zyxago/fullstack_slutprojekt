@@ -1,13 +1,14 @@
 import React from "react";
 import Recipe from "../entities/Recipe";
 import {Card, Content, Media} from "react-bulma-components";
+import {TableRowIngredient} from "./Ingredient";
 
 /**
  *
  * @param{Recipe} recipe
  * @returns {*}
  */
-export function RecipeFullView(recipe) {
+export function RecipeFullView({recipe}) {
     return (
         <Card>
             <Card.Content>
@@ -34,10 +35,10 @@ export function RecipeFullView(recipe) {
  * @param{Recipe} recipe
  * @returns {*}
  */
-export function RecipeBriefView(recipe) {
+export function RecipeBriefView({recipe}) {
     return (
         <Card>
-            <Card.Content>
+            <Card.Content onClick={()=>console.log("He clicked on me :O")}>
                 <Media>
                     <Media.Item>
                         <img src={recipe.image} href={"No image found"}/>
@@ -50,4 +51,12 @@ export function RecipeBriefView(recipe) {
             </Card.Content>
         </Card>
     )
+}
+
+export function TableRowRecipeIngredients({recipe}){
+    let ingredients = [];
+    for(const ingredient of recipe.ingredients){
+        ingredients.push(<TableRowIngredient ingredient={ingredient}/>)
+    }
+    return ingredients;
 }

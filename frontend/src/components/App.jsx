@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from "./Header";
 import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
-import {Content} from "react-bulma-components"
+import {Content, Container} from "react-bulma-components"
 import Footer from "./Footer";
 import "../resources/css/app.scss";
 import RecipeTable from "./RecipeTable";
@@ -11,7 +11,7 @@ export default function App() {
     const mainPath = '/fullstack_slutprojekt-1.0';
 
     return (
-        <div className="App">
+        <Container>
             <Router>
                 <Header title="Recipe List" mainPath={mainPath}/>
                 <Content>
@@ -23,6 +23,6 @@ export default function App() {
                 </Content>
             </Router>
             <Footer/>
-        </div>
+        </Container>
     );
 }

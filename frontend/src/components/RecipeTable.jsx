@@ -11,7 +11,7 @@ export default function RecipeTable() {
     function populateTable(recipeList) {
         const htmlRecipes = [];
         for (const recipe of recipeList) {
-            htmlRecipes.push(RecipeBriefView(recipe))
+            htmlRecipes.push(<RecipeBriefView recipe={recipe}/>)
         }
         return htmlRecipes;
     }
