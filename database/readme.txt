@@ -1,0 +1,1 @@
+om man inte vill använda its.teknkium.it finns ett exporterad sql schema här
