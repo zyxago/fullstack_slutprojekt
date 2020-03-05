@@ -20,7 +20,7 @@ public class InstructionBean {
      * @param resData
      * @return
      */
-    public List<String> getInstructionList(ResultSet resData) {
+    public List<String> getRecipeInstructionList(ResultSet resData) {
         List<String> instructionList = new ArrayList<>();
         try {
             while (resData.next()) {

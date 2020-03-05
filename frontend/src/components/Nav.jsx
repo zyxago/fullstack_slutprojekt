@@ -2,6 +2,7 @@ import React from "react";
 import {Navbar} from "react-bulma-components";
 import {Link} from "react-router-dom";
 import {SignIn, SignOut, SignUp} from "./Authentication";
+import "../resources/css/nav.scss";
 
 export default function Nav(props){
     return (

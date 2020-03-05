@@ -20,7 +20,7 @@ public class IngredientBean {
      * @param resData
      * @return
      */
-    public List<Ingredient> getIngredients(ResultSet resData) {
+    public List<Ingredient> getRecipeIngredients(ResultSet resData) {
         List<Ingredient> ingredientList = new ArrayList<>();
         try {
             while (resData.next()) {
@@ -30,7 +30,7 @@ public class IngredientBean {
                         resData.getString("measurement")));
             }
         } catch (Exception e) {
-            LOGGER.error("Error in IngredientBean.getIngredients: " + e.getMessage());
+            LOGGER.error("Error in IngredientBean.getRecipeIngredients: " + e.getMessage());
         }
         return ingredientList;
     }
@@ -50,7 +50,7 @@ public class IngredientBean {
                 stmt.executeQuery();
             }
         } catch (Exception e) {
-            LOGGER.error("Error in RecipeBean.addIngredientList: " + e.getMessage());
+            LOGGER.error("Error in IngredientBean.addIngredientList: " + e.getMessage());
         }
     }
 
@@ -66,7 +66,35 @@ public class IngredientBean {
             stmt.executeUpdate();
             addIngredientList(id, ingredientList);
         } catch (Exception e) {
-            LOGGER.error("Error in RecipeBean.updateIngredientList: " + e.getMessage());
+            LOGGER.error("Error in IngredientBean.updateIngredientList: " + e.getMessage());
         }
+    }
+
+    public List<String> getIngredients() {
+        List<String> ingredients = new ArrayList<>();
+        try(Connection conn = new ConnectionFactory().getConnection()){
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM ingredient");
+            ResultSet data = stmt.executeQuery();
+            while(data.next()){
+                ingredients.add(data.getString(1));
+            }
+        } catch (Exception e){
+            LOGGER.error("Error in IngredientBean.getIngredients: " + e.getMessage());
+        }
+        return ingredients;
+    }
+
+    public List<String> getMeasurement() {
+        List<String> measurement = new ArrayList<>();
+        try(Connection conn = new ConnectionFactory().getConnection()){
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM measurement");
+            ResultSet data = stmt.executeQuery();
+            while(data.next()){
+                measurement.add(data.getString(1));
+            }
+        } catch (Exception e){
+            LOGGER.error("Error in IngredientBean.getMeasurement: " + e.getMessage());
+        }
+        return measurement;
     }
 }

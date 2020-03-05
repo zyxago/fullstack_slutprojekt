@@ -18,7 +18,7 @@ export default function RecipeTable() {
 
     return (
         <div>
-            <ul>
+            <ul className="is-marginless">
                 {populateTable(recipeList)}
             </ul>
         </div>

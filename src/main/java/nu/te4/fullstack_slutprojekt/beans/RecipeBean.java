@@ -52,15 +52,15 @@ public class RecipeBean {
                 cs.setInt(1, data.getInt("id"));
                 if (cs.execute()) {
                     ResultSet resData = cs.getResultSet();
-                    recipeBuilder.setIngredients(ingredientBean.getIngredients(resData));
+                    recipeBuilder.setIngredients(ingredientBean.getRecipeIngredients(resData));
                     resData.close();
                     cs.getMoreResults();
                     resData = cs.getResultSet();
-                    recipeBuilder.setCategories(categoryBean.getCategoryList(resData));
+                    recipeBuilder.setCategories(categoryBean.getRecipeCategoryList(resData));
                     resData.close();
                     cs.getMoreResults();
                     resData = cs.getResultSet();
-                    recipeBuilder.setInstructions(instructionBean.getInstructionList(resData));
+                    recipeBuilder.setInstructions(instructionBean.getRecipeInstructionList(resData));
                     resData.close();
                 }
                 recipeList.add(recipeBuilder.build());
@@ -87,6 +87,7 @@ public class RecipeBean {
     }
 
     public int addRecipe(Recipe recipe) {
+        int recipeId = 0;
         try (Connection conn = new ConnectionFactory().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO recipe VALUES(null, ?, ?, null, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, recipe.getTitle());
@@ -96,7 +97,7 @@ public class RecipeBean {
             if (stmt.executeUpdate() > 0) {
                 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
-                        int recipeId = generatedKeys.getInt(1);
+                        recipeId = generatedKeys.getInt(1);
                         ingredientBean.addIngredientList(recipeId, recipe.getIngredients());
                         categoryBean.addCategoryList(recipeId, recipe.getCategories());
                         instructionBean.addInstructionList(recipeId, recipe.getInstructions());
@@ -105,7 +106,7 @@ public class RecipeBean {
                     }
                 }
             }
-            return 1;
+            return recipeId;
         } catch (Exception e) {
             LOGGER.error("Error in RecipeBean.addRecipe: " + e.getMessage());
         }

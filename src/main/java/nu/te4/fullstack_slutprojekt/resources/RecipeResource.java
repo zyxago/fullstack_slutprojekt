@@ -44,8 +44,9 @@ public class RecipeResource {
     @POST
     @Path("/recipe")
     public Response addRecipe(Recipe recipe) {
-        if (recipeBean.addRecipe(recipe) > 0) {
-            return Response.status(Response.Status.CREATED).build();
+        int id = recipeBean.addRecipe(recipe);
+        if (id > 0) {
+            return Response.status(Response.Status.CREATED).entity(id).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }

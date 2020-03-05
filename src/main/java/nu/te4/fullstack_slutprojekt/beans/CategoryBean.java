@@ -20,14 +20,14 @@ public class CategoryBean {
      * @param resData
      * @return
      */
-    public List<String> getCategoryList(ResultSet resData) {
+    public List<String> getRecipeCategoryList(ResultSet resData) {
         List<String> categoryList = new ArrayList<>();
         try {
             while (resData.next()) {
                 categoryList.add(resData.getString("category"));
             }
         } catch (Exception e) {
-            LOGGER.error("Error in CategoryBean.getCategoryList: " + e.getMessage());
+            LOGGER.error("Error in CategoryBean.getRecipeCategoryList: " + e.getMessage());
         }
         return categoryList;
     }
@@ -63,5 +63,19 @@ public class CategoryBean {
         } catch (Exception e) {
             LOGGER.error("Error in CategoryBean.updateCategoryList: " + e.getMessage());
         }
+    }
+
+    public List<String> getCategories(){
+        List<String> categories = new ArrayList<>();
+        try (Connection conn = new ConnectionFactory().getConnection()){
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM category");
+            ResultSet data = stmt.executeQuery();
+            while (data.next()) {
+                categories.add(data.getString(1));
+            }
+        } catch (Exception e) {
+            LOGGER.error("Error in CategoryBean.getCategories: " + e.getMessage());
+        }
+        return categories;
     }
 }
