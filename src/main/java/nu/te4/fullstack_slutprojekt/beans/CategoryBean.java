@@ -58,7 +58,7 @@ public class CategoryBean {
         try (Connection conn = new ConnectionFactory().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM category_recipe WHERE recipe_id = ?");
             stmt.setInt(1, id);
-            stmt.executeQuery();
+            stmt.executeUpdate();
             addCategoryList(id, categories);
         } catch (Exception e) {
             LOGGER.error("Error in CategoryBean.updateCategoryList: " + e.getMessage());

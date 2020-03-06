@@ -12,7 +12,7 @@ public class RecipeBuilder {
     private String title;
     private int id;
     private int likes;
-    private int repports;
+    private int reports;
     private int writerId;
 
     public RecipeBuilder() {
@@ -106,12 +106,12 @@ public class RecipeBuilder {
         return this;
     }
 
-    public int getRepports() {
-        return repports;
+    public int getReports() {
+        return reports;
     }
 
-    public RecipeBuilder setRepports(int repports) {
-        this.repports = repports;
+    public RecipeBuilder setReports(int reports) {
+        this.reports = reports;
         return this;
     }
 

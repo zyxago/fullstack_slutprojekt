@@ -1,11 +1,7 @@
 package nu.te4.fullstack_slutprojekt.resources;
 
 import javax.ejb.EJB;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -24,14 +20,30 @@ public class AuthenticationResource {
     AuthenticationBean authenticationBean;
 
     @POST
-    @Path("register")
-    public Response register(Credentials credentials) {
-        return null;
+    @Path("register/oauth")
+    public Response oauthRegister(@HeaderParam("Authorization") String code) {
+        if (authenticationBean.registerOauth(code) < 0) {
+            return Response.status(Response.Status.CREATED).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
+    }
+
+    @POST
+    @Path("login/oauth")
+    public Response oauthLogin(@HeaderParam("Authorization") String code) {
+        String token = authenticationBean.getToken(code);
+        if (token != "") {
+            return Response.status(Response.Status.OK).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @GET
     @Path("verify")
-    public Response verify(String token) {
-        return null;
+    public Response verify(@HeaderParam("Authorization") String token) {
+        if (authenticationBean.verify(token)) {
+            return Response.status(Response.Status.OK).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 }

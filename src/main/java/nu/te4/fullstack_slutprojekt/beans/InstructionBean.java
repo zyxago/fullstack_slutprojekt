@@ -53,12 +53,11 @@ public class InstructionBean {
 
     public void updateInstructionList(int id, List<String> instructions) {
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("UPDATE instruction_recipe SET instruction_order = ?, instruction_text = ? WHERE recipe_id = ?");
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM instruction_recipe WHERE recipe_id = ?");
             for(String instruction : instructions){
-                stmt.setInt(1, instructions.indexOf(instruction));
-                stmt.setString(2, instruction);
-                stmt.setInt(3, id);
+                stmt.setInt(1, id);
                 stmt.executeUpdate();
+                addInstructionList(id, instructions);
             }
         } catch (Exception e) {
             LOGGER.error("Error in InstructionBean.updateInstructionList: " + e.getMessage());

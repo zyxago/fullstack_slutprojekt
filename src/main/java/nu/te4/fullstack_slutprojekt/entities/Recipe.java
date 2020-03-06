@@ -18,15 +18,17 @@ public class Recipe extends Post {
     private List<String> instructions;
     private List<Ingredient> ingredients;
     private List<String> categories;
+    private int id;
 
     public Recipe(RecipeBuilder builder) {
-        super(builder.getId(), builder.getLikes(), builder.getRepports(), builder.getWriterId());
+        super(builder.getId(), builder.getLikes(), builder.getReports(), builder.getWriterId());
         this.image = builder.getImage();
         this.title = builder.getTitle();
         this.information = builder.getInformation();
         this.instructions = builder.getInstructions();
         this.ingredients = builder.getIngredients();
         this.categories = builder.getCategories();
+        this.id = builder.getId();
     }
 
     public Recipe(){}

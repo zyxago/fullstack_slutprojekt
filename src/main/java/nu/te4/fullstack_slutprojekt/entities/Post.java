@@ -11,13 +11,13 @@ package nu.te4.fullstack_slutprojekt.entities;
 public abstract class Post {
     protected int id;
     protected int likes;
-    protected int repports;
+    protected int reports;
     protected int writerId;
 
-    public Post(int id, int likes, int repports, int writerId) {
+    public Post(int id, int likes, int reports, int writerId) {
         this.id = id;
         this.likes = likes;
-        this.repports = repports;
+        this.reports = reports;
         this.writerId = writerId;
     }
 
@@ -40,12 +40,12 @@ public abstract class Post {
         this.likes = likes;
     }
 
-    public int getRepports() {
-        return repports;
+    public int getReports() {
+        return reports;
     }
 
-    public void setRepports(int repports) {
-        this.repports = repports;
+    public void setReports(int reports) {
+        this.reports = reports;
     }
 
     public int getWriterId() {

@@ -2,6 +2,7 @@ export default class Recipe {
 
     constructor(recipeData) {
         if(recipeData) {
+            this.id = recipeData.id;
             this.writerId = recipeData.writerId;
             this.image = recipeData.image;
             this.information = recipeData.information;
@@ -9,7 +10,7 @@ export default class Recipe {
             this.categories = recipeData.categories;
             this.ingredients = recipeData.ingredients;
             this.likes = recipeData.likes;
-            this.repports = recipeData.repports;
+            this.reports = recipeData.reports;
             this.title = recipeData.title;
         } else{
             this.writerId = 0;
@@ -19,7 +20,7 @@ export default class Recipe {
             this.categories = [];
             this.ingredients = [];
             this.likes = 0;
-            this.repports = 0;
+            this.reports = 0;
             this.title = "";
         }
     }

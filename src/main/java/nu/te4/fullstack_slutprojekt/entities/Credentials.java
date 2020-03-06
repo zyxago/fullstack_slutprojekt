@@ -5,6 +5,7 @@
  */
 package nu.te4.fullstack_slutprojekt.entities;
 
+
 /**
  * @author erikh
  */
@@ -15,12 +16,9 @@ public class Credentials {
     private int oauthId;
     private String token;
 
-    public Credentials(String username, String password, int id, int oauthId, String token) {
+    public Credentials(String username, String password) {
         this.username = username;
         this.password = password;
-        this.id = id;
-        this.oauthId = oauthId;
-        this.token = token;
     }
 
     public Credentials() {

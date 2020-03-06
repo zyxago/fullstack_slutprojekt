@@ -2,25 +2,24 @@ import React from "react";
 import {getRecipes} from "../resources/api/recipe";
 import {RecipeBriefView} from "./Recipe";
 
-export default function RecipeTable() {
+export default function RecipeTable({mainPath, setSelectedRecipe}) {
     const [recipeList, setRecipeList] = React.useState([]);
+
     React.useEffect(() => {
         getRecipes(setRecipeList)
     }, []);//websocket dependency here maybe
 
-    function populateTable(recipeList) {
-        const htmlRecipes = [];
+    function PopulateTable({recipeList}) {
+        const recipes = [];
         for (const recipe of recipeList) {
-            htmlRecipes.push(<RecipeBriefView recipe={recipe}/>)
+            recipes.push(<RecipeBriefView recipe={recipe} setSelectedRecipe={setSelectedRecipe} mainPath={mainPath}/>)
         }
-        return htmlRecipes;
+        return recipes;
     }
 
     return (
         <div>
-            <ul className="is-marginless">
-                {populateTable(recipeList)}
-            </ul>
+            <PopulateTable recipeList={recipeList}/>
         </div>
     );
 }

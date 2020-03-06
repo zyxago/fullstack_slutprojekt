@@ -12,11 +12,35 @@ export async function getRecipes(setRecipeList) {
     if (data) {
         for (const recipeData of data) {
             let recipe = new Recipe(recipeData);
-            await getRecipeImage(recipeData.id, (img)=>{recipe.image = img});
+            await getRecipeImage(recipeData.id, (img) => {
+                recipe.image = img
+            });
             recipes.push(recipe)
         }
     }
     setRecipeList(recipes);
+}
+
+export async function likeRecipe(id) {
+    const result = await fetch(`/api/recipe/like/${id}`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    const data = await result.status;
+    console.log(data);
+}
+
+export async function reportRecipe(id) {
+    const result = await fetch(`/api/recipe/report/${id}`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    const data = await result.status;
+    console.log(data);
 }
 
 /**
@@ -43,13 +67,26 @@ export async function postRecipe(recipe) {
     recipe.writerId = 1;//TEMP
     const result = await fetch("/api/recipe", {
         method: "POST",
-        headers:{
+        headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(recipe)
     });
     const data = await result.json();
     await postRecipeImage(data, image);
+}
+
+export async function updateRecipe(recipe){
+    //KOLLA I local storage efter användar token, skicka sedan med den i recipe
+    recipe.image = null;
+    const result = await fetch(`/api/recipe`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(recipe)
+    });
+    const data = await result.json();
 }
 
 /**
@@ -61,7 +98,7 @@ export async function postRecipe(recipe) {
 export async function postRecipeImage(id, image) {
     const result = await fetch(`/api/recipe/${id}/img`, {
         method: "PUT",
-        headers:{
+        headers: {
             'Content-Type': 'application/octet-stream'
         },
         body: image

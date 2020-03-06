@@ -45,7 +45,7 @@ public class RecipeBean {
                         .setId(data.getInt("id"))
                         .setWriterId(data.getInt("writer_id"))
                         .setLikes(data.getInt("likes"))
-                        .setRepports(data.getInt("repports"))
+                        .setReports(data.getInt("reports"))
                         .setInformation(data.getString("info"))
                         .setTitle(data.getString("title"));
 
@@ -119,13 +119,15 @@ public class RecipeBean {
             stmt.setString(1, recipe.getTitle());
             stmt.setString(2, recipe.getInformation());
             stmt.setInt(3, recipe.getId());
+            stmt.executeUpdate();
             instructionBean.updateInstructionList(recipe.getId(), recipe.getInstructions());
             ingredientBean.updateIngredientList(recipe.getId(), recipe.getIngredients());
             categoryBean.updateCategoryList(recipe.getId(), recipe.getCategories());
+            return 1;
         } catch (Exception e){
             LOGGER.error("Error in RecipeBean.modifyRecipe: " + e.getMessage());
+            return 0;
         }
-        return 0;
     }
 
     public int likeRecipe(int id) {
@@ -139,13 +141,13 @@ public class RecipeBean {
         }
     }
 
-    public int repportRecipe(int id) {
+    public int reportRecipe(int id) {
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("UPDATE stats SET repports = repports+1 WHERE id IN (SELECT stats_id FROM recipe WHERE id = ?)");
+            PreparedStatement stmt = conn.prepareStatement("UPDATE stats SET reports = reports+1 WHERE id IN (SELECT stats_id FROM recipe WHERE id = ?)");
             stmt.setInt(1, id);
             return stmt.executeUpdate();
         } catch (Exception e) {
-            LOGGER.error("Error in RecipeBean.repportRecipe: " + e.getMessage());
+            LOGGER.error("Error in RecipeBean.reportRecipe: " + e.getMessage());
             return 0;
         }
     }

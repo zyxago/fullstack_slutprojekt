@@ -3,13 +3,13 @@ import {Table, Modal, Content} from "react-bulma-components";
 import Recipe from "../entities/Recipe";
 import Ingredient from "../entities/Ingredient";
 import {TableRowRecipeIngredients} from "./Recipe";
-import {postRecipe} from "../resources/api/recipe";
+import {postRecipe, updateRecipe} from "../resources/api/recipe";
 import {getCategories} from "../resources/api/category";
 import {getIngredients, getMeasurements} from "../resources/api/ingredient";
 
-let imageData;
+let imageData = undefined;
 
-export default function PostRecipe() {
+export default function PostRecipe({modifyRecipe}) {
 
     const [categories, setCategories] = React.useState([]);
     const [ingredients, setIngredients] = React.useState([]);
@@ -17,7 +17,7 @@ export default function PostRecipe() {
     const [showInstruction, setShowInstruction] = React.useState(false);
     const [showIngredient, setShowIngredient] = React.useState(false);
     const [showCategory, setShowCategory] = React.useState(false);
-    const [recipe, setRecipe] = React.useState(new Recipe());
+    const [recipe, setRecipe] = React.useState(modifyRecipe || new Recipe());
 
     React.useEffect(() => getCategories(setCategories), []);
     React.useEffect(() => getIngredients(setIngredients), []);
@@ -153,16 +153,24 @@ export default function PostRecipe() {
     }
 
     function sendRecipe() {
-        recipe.title = document.getElementById("title").value;
-        recipe.information = document.getElementById("info").value;
-        recipe.image = imageData;
-        postRecipe(recipe);
+        let title = document.getElementById("title");
+        let information = document.getElementById("info");
+        recipe.title = title.value !== title.placeholder && title.value !== "" ? title.value : title.placeholder;
+        recipe.information = information.value !== information.placeholder && information.value !== "" ? information.value : information.placeholder;
+        if (imageData !== undefined) {
+            recipe.image = imageData;
+        }
+        if (recipe.id) {
+            updateRecipe(recipe);
+        } else {
+            postRecipe(recipe);
+        }
     }
 
     function openFile(e) {
         let file = e.target.files[0];
         let reader = new FileReader();
-        reader.onload = function(){
+        reader.onload = function () {
             imageData = reader.result;
         };
         reader.readAsArrayBuffer(file);
@@ -175,11 +183,10 @@ export default function PostRecipe() {
             <AddIngredient/>
             <form onSubmit={(e) => e.preventDefault()}>
                 <label className="label" htmlFor="title">Title: </label>
-                <input className="input" type="text" id="title" placeholder="Recipe Title Here"/>
-
+                <input className="input" type="text" id="title" placeholder={recipe.title}/>
                 <br/>
                 <label className="label" htmlFor="info">Info Text: </label>
-                <textarea className="textarea" id="info"/>
+                <textarea className="textarea" id="info" placeholder={recipe.information}/>
 
                 <br/>
                 <label className="label" htmlFor="instruction">Instructions: </label>
@@ -189,7 +196,6 @@ export default function PostRecipe() {
                 <br/>
                 <label className="label" htmlFor="image">Image: </label>
                 <input onChange={openFile} type="file" id="image" accept="image/*"/>
-
                 <br/>
                 <label className="label" htmlFor="ingredients">Ingredients: </label>
                 <button onClick={() => setShowIngredient(true)} className="button is-primary">Add Ingredient</button>
