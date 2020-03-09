@@ -1,15 +1,15 @@
 import React from "react";
-import {Table, Modal, Content} from "react-bulma-components";
+import {Table, Modal, Content, Box} from "react-bulma-components";
 import Recipe from "../entities/Recipe";
 import Ingredient from "../entities/Ingredient";
-import {TableRowRecipeIngredients} from "./Recipe";
+import {ListRecipeCategories, ListRecipeInstructions, TableRowRecipeIngredients} from "./Recipe";
 import {postRecipe, updateRecipe} from "../resources/api/recipe";
 import {getCategories} from "../resources/api/category";
 import {getIngredients, getMeasurements} from "../resources/api/ingredient";
 
 let imageData = undefined;
 
-export default function PostRecipe({modifyRecipe}) {
+export default function PostRecipe({modifyRecipe, user}) {
 
     const [categories, setCategories] = React.useState([]);
     const [ingredients, setIngredients] = React.useState([]);
@@ -19,9 +19,10 @@ export default function PostRecipe({modifyRecipe}) {
     const [showCategory, setShowCategory] = React.useState(false);
     const [recipe, setRecipe] = React.useState(modifyRecipe || new Recipe());
 
-    React.useEffect(() => getCategories(setCategories), []);
-    React.useEffect(() => getIngredients(setIngredients), []);
-    React.useEffect(() => getMeasurements(setMeasurements), []);
+    React.useEffect(() => {getCategories(setCategories)}, []);
+    React.useEffect(() => {getIngredients(setIngredients)}, []);
+    React.useEffect(() => {getMeasurements(setMeasurements)}, []);
+
 
     function parseInstruction() {
         const text = document.getElementById("inputInstruction").value;
@@ -132,20 +133,6 @@ export default function PostRecipe({modifyRecipe}) {
         )
     }
 
-    function RecipeInstructionsToText() {
-        let output = "";
-        recipe.instructions.map((instruction) => output += `${instruction}\n`);
-        let textarea = <textarea className="textarea" readOnly={true} id="instruction" value={output}/>;
-        return textarea
-    }
-
-    function RecipeCategoriesToText() {
-        let output = "";
-        recipe.categories.map((category) => output += `${category}\n`);
-        let textarea = <textarea className="textarea" readOnly={true} id="categories" value={output}/>;
-        return textarea
-    }
-
     function FillDatalist({list}) {
         return list.map((item) => {
             return <option>{item}</option>
@@ -157,6 +144,7 @@ export default function PostRecipe({modifyRecipe}) {
         let information = document.getElementById("info");
         recipe.title = title.value !== title.placeholder && title.value !== "" ? title.value : title.placeholder;
         recipe.information = information.value !== information.placeholder && information.value !== "" ? information.value : information.placeholder;
+        recipe.writerId = user.id;
         if (imageData !== undefined) {
             recipe.image = imageData;
         }
@@ -177,7 +165,7 @@ export default function PostRecipe({modifyRecipe}) {
     }
 
     return (
-        <div>
+        <Box>
             <AddInstruction/>
             <AddCategory/>
             <AddIngredient/>
@@ -191,7 +179,7 @@ export default function PostRecipe({modifyRecipe}) {
                 <br/>
                 <label className="label" htmlFor="instruction">Instructions: </label>
                 <button onClick={() => setShowInstruction(true)} className="button is-primary">Add Instruction:</button>
-                {recipe.instructions && <RecipeInstructionsToText/>}
+                {recipe.instructions && <Box><ol><ListRecipeInstructions recipe={recipe}/></ol></Box>}
 
                 <br/>
                 <label className="label" htmlFor="image">Image: </label>
@@ -212,12 +200,12 @@ export default function PostRecipe({modifyRecipe}) {
                     </tbody>
                 </Table>
                 <label className="label" htmlFor="ingredients">Categories: </label>
-                {recipe.categories && <RecipeCategoriesToText/>}
+                {recipe.categories && <Box><li><ListRecipeCategories recipe={recipe}/></li></Box>}
                 <button onClick={() => setShowCategory(true)} className="button is-primary">Add Category</button>
 
                 <br/>
                 <button onClick={() => sendRecipe()} className="button is-primary">Post Recipe</button>
             </form>
-        </div>
+        </Box>
     )
 }

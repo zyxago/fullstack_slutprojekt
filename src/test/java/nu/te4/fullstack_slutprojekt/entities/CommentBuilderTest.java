@@ -38,7 +38,8 @@ public class CommentBuilderTest {
     @Test
     public void testBuildNullText() {
         System.out.println("build:comment - NULL text");
-        instance.setText(null);
+        instance.setText(null)
+                .setUsername("");
         try {
             instance.build();
             fail("Did not throw IllegalStateException when text string was NULL.");
@@ -55,6 +56,7 @@ public class CommentBuilderTest {
         System.out.println("build:comment - Negative Writer ID");
         instance.setWriterId(-1)
                 .setText("")
+                .setUsername("")
                 .build();
         int expResult = 0;
         Comment result = instance.build();
@@ -70,9 +72,26 @@ public class CommentBuilderTest {
         instance
                 .setId(-1)
                 .setText("")
+                .setUsername("")
                 .build();
         int expResult = 0;
         Comment result = instance.build();
         assertEquals(expResult, result.getId());
+    }
+
+    /**
+     * Test of build method, of class CommentBuilder. username = NULL
+     */
+    @Test
+    public void testBuildNullUsername() {
+        System.out.println("build:comment - NULL username");
+        instance.setText("")
+                .setUsername(null);
+        try {
+            instance.build();
+            fail("Did not throw IllegalStateException when username string was NULL.");
+        } catch (IllegalStateException e) {
+
+        }
     }
 }

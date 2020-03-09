@@ -7,6 +7,7 @@ public class CommentBuilder {
     private int likes;
     private int repports;
     private int writerId;
+    private String username;
 
     public CommentBuilder() {
     }
@@ -23,6 +24,9 @@ public class CommentBuilder {
         }
         if (getWriterId() < 0) {
             setWriterId(0);
+        }
+        if(getUsername() == null){
+            throw new IllegalStateException("Comment must have a username");
         }
         return new Comment(this);
     }
@@ -78,6 +82,15 @@ public class CommentBuilder {
 
     public CommentBuilder setWriterId(int writerId) {
         this.writerId = writerId;
+        return this;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public CommentBuilder setUsername(String username) {
+        this.username = username;
         return this;
     }
 }

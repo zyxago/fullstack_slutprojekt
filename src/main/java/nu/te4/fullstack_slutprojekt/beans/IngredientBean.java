@@ -26,7 +26,7 @@ public class IngredientBean {
             while (resData.next()) {
                 ingredientList.add(new Ingredient(
                         resData.getString("ingredient"),
-                        resData.getInt("amount"),
+                        resData.getFloat("amount"),
                         resData.getString("measurement")));
             }
         } catch (Exception e) {
@@ -45,7 +45,7 @@ public class IngredientBean {
             for (Ingredient ingredient : ingredientList) {
                 stmt.setInt(1, id);
                 stmt.setString(2, ingredient.getName());
-                stmt.setInt(3, ingredient.getAmount());
+                stmt.setFloat(3, ingredient.getAmount());
                 stmt.setString(4, ingredient.getMeasurement());
                 stmt.executeQuery();
             }

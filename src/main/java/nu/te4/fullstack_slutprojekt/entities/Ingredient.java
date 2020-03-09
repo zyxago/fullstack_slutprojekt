@@ -11,10 +11,10 @@ package nu.te4.fullstack_slutprojekt.entities;
  */
 public class Ingredient {
     private String name;
-    private int amount;
+    private float amount;
     private String measurement;
 
-    public Ingredient(String name, int amount, String measurement) {
+    public Ingredient(String name, float amount, String measurement) {
         this.name = name;
         this.amount = amount;
         this.measurement = measurement;
@@ -31,11 +31,11 @@ public class Ingredient {
         this.name = name;
     }
 
-    public int getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 

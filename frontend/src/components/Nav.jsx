@@ -12,12 +12,12 @@ export default function Nav(props){
                     <Navbar.Item>
                         <Link to={`${props.mainPath}`}>Home</Link>
                     </Navbar.Item>
-                    <Navbar.Item>
+                    {props.authorized && <Navbar.Item>
                         <Link to={`${props.mainPath}/postRecipe`}>Post Recipe</Link>
-                    </Navbar.Item>
+                    </Navbar.Item>}
                     {props.authorized ?
                         <Navbar.Item>
-                            <SignOut/>
+                            <SignOut setUser={props.setUser}/>
                         </Navbar.Item>
                         : <>
                             <Navbar.Item>

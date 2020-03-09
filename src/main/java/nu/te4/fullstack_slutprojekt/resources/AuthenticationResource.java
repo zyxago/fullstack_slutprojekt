@@ -19,21 +19,12 @@ public class AuthenticationResource {
     @EJB
     AuthenticationBean authenticationBean;
 
-    @POST
-    @Path("register/oauth")
+    @GET
+    @Path("authenticate")
     public Response oauthRegister(@HeaderParam("Authorization") String code) {
-        if (authenticationBean.registerOauth(code) < 0) {
-            return Response.status(Response.Status.CREATED).build();
-        }
-        return Response.status(Response.Status.BAD_REQUEST).build();
-    }
-
-    @POST
-    @Path("login/oauth")
-    public Response oauthLogin(@HeaderParam("Authorization") String code) {
-        String token = authenticationBean.getToken(code);
-        if (token != "") {
-            return Response.status(Response.Status.OK).build();
+        Credentials cred = authenticationBean.authenticate(code);
+        if (!cred.getToken().isEmpty()) {
+            return Response.status(Response.Status.OK).entity(cred).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }

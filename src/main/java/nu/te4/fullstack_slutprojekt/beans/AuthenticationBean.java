@@ -8,6 +8,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 
 import java.security.SecureRandom;
+import java.sql.ResultSet;
 import java.util.Base64;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
@@ -26,25 +27,25 @@ import java.sql.PreparedStatement;
 public class AuthenticationBean {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationBean.class);
-    private final String CLIENT_ID = "3ddec322c9443ab7553b";
-    private final String CLIENT_SECRET = "76bc5b865370fef03cea019024729e5d12908d66";
 
-    public int registerOauth(String code) {
+    public Credentials authenticate(String code) {
         String token = getToken(code);
         Credentials cred = new Credentials();
-            Client client = ClientBuilder.newClient();
-            WebTarget target = client.target("https://api.github.com/user?access_token=" + token);
-            JsonObject jsonData = target.request(MediaType.APPLICATION_JSON).get(JsonObject.class);
-            int id = jsonData.getInt("id");
-            String name = jsonData.getString("name");
-            cred.setOauthId(id);
-            cred.setUsername(name);
-            cred.setToken(token);
-            saveCred(cred);
-        return 0;
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target("https://api.github.com/user?access_token=" + token);
+        JsonObject jsonData = target.request(MediaType.APPLICATION_JSON).get(JsonObject.class);
+        int id = jsonData.getInt("id");
+        String name = jsonData.getString("name");
+        cred.setOauthId(id);
+        cred.setUsername(name);
+        cred.setToken(token);
+        cred.setId(getOauthUserId(cred));
+        return cred;
     }
 
-    public String getToken(String code) {
+    private String getToken(String code) {
+        String CLIENT_ID = "3ddec322c9443ab7553b";
+        String CLIENT_SECRET = "76bc5b865370fef03cea019024729e5d12908d66";
         String url = String.format("https://github.com/login/oauth/access_token?client_id=%s&client_secret=%s&code=%s", CLIENT_ID, CLIENT_SECRET, code);
         Client client = ClientBuilder.newClient();
         String result = client.target(url).request().post(null, String.class);
@@ -57,18 +58,22 @@ public class AuthenticationBean {
         return target.request(MediaType.APPLICATION_JSON).get().getStatus() == 200;
     }
 
-    public int saveCred(Credentials cred) {
+    private int getOauthUserId(Credentials cred) {
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO user VALUES(null, ?, ?, ?, ?)");
-            stmt.setString(1, cred.getUsername());
-            stmt.setString(2, BCrypt.withDefaults().hashToString(10, cred.getPassword().toCharArray()));
-            stmt.setInt(3, cred.getOauthId());
-            stmt.setString(4, cred.getToken());
-            return stmt.executeUpdate();
+            PreparedStatement stmt = conn.prepareStatement("SELECT addOauthUser(?, ?)");
+            stmt.setInt(1, cred.getOauthId());
+            stmt.setString(2, cred.getUsername());
+            ResultSet data = stmt.executeQuery();
+            if (data.first()) {
+                return data.getInt(1);
+            }
         } catch (Exception e) {
-            return 0;
         }
+        return 0;
     }
+
+
+    // Non Oauth Stuff
 
     private int updateToken(String token, Credentials cred) {
         try (Connection conn = new ConnectionFactory().getConnection()) {

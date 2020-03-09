@@ -1,7 +1,7 @@
 {
   "name": "webapp",
   "version": "0.1.0",
-  "proxy": "http://localhost:8080/fullstack_slutprojekt-1.0",
+  "proxy": "http://localhost:8080",
   "homepage": "./",
   "private": true,
   "dependencies": {

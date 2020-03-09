@@ -2,7 +2,7 @@ import React from "react";
 
 export function TableRowIngredient({ingredient}) {
     return (
-        <tr>
+        <tr key={ingredient.name}>
             <td>{ingredient.name}</td>
             <td>{ingredient.amount}</td>
             <td>{ingredient.measurement}</td>

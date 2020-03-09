@@ -4,23 +4,49 @@ import {Card, Content, Media, Table} from "react-bulma-components";
 import {TableRowIngredient} from "./Ingredient";
 import "../resources/css/recipe.scss";
 import {Link} from "react-router-dom";
-import {likeRecipe, reportRecipe} from "../resources/api/recipe";
+import {likeRecipe, removeRecipe, reportRecipe} from "../resources/api/recipe";
+import CommentList from "./CommentList";
+import {postComment} from "../resources/api/comment";
 
 /**
  *
- * @param{Recipe} recipe
+ * @param recipe
+ * @param mainPath
+ * @param user
  * @returns {*}
+ * @constructor
  */
-export function RecipeFullView({recipe, mainPath}) {
-    console.log(recipe);
+export function RecipeFullView({recipe, mainPath, user}) {
+
+    function submitComment() {
+        let text = document.getElementById("comment").value;
+        let comment = {
+            writerId: user.id,
+            text: text,
+            username: user.username,
+            parentId: recipe.id
+        };
+        postComment(comment);
+    }
+
+    function deleteRecipe(id) {
+        removeRecipe(id);
+    }
+
     return (
         <Card>
             <Card.Content>
                 <Card.Header>
                     <h2>{recipe.title}</h2>
-                    <button className="button" onClick={()=>likeRecipe(recipe.id)}>Like {recipe.likes}</button>
-                    <button className="button" onClick={()=>reportRecipe(recipe.id)}>Report</button>
-                    <Link to={`${mainPath}/postRecipe`}>Edit</Link>
+                    {user && <>
+                        <button className="button" onClick={() => likeRecipe(recipe.id)}>Like {recipe.likes}</button>
+                        <button className="button" onClick={() => reportRecipe(recipe.id)}>Report</button>
+                    </>}
+                    {user.id === recipe.writerId && <>
+                        <Link className="button" to={`${mainPath}/postRecipe`}>Edit</Link>
+                        <button className="button" onClick={() => deleteRecipe(recipe.id)}>Remove Recipe</button>
+                    </>}
+
                 </Card.Header>
                 <Content>
                     <Media>
@@ -43,7 +69,11 @@ export function RecipeFullView({recipe, mainPath}) {
                     </Table>
                     <p>Categories</p>
                     <ul><ListRecipeCategories recipe={recipe}/></ul>
-                    <ul><ListRecipeInstructions recipe={recipe}/></ul>
+                    <ol><ListRecipeInstructions recipe={recipe}/></ol>
+                    <div>Comments</div>
+                    <input className="input" type="text" placeholder="Say something..." id="comment"/>
+                    <button className="button" onClick={submitComment}>Comment</button>
+                    <CommentList recipeId={recipe.id}/>
                 </Content>
             </Card.Content>
         </Card>
@@ -55,7 +85,8 @@ export function RecipeBriefView({recipe, setSelectedRecipe, mainPath}) {
         <Card>
             <Card.Content>
                 <Content>
-                    <h2 onClick={()=>setSelectedRecipe(recipe)}><Link to={`${mainPath}/${recipe.title}`}>{recipe.title}</Link></h2>
+                    <h2 onClick={() => setSelectedRecipe(recipe)}><Link
+                        to={`${mainPath}/${recipe.title}`}>{recipe.title}</Link></h2>
                     <Media>
                         <Media.Item>
                             <img src={recipe.image} href={"No image found"}/>
@@ -73,23 +104,23 @@ export function RecipeBriefView({recipe, setSelectedRecipe, mainPath}) {
 export function TableRowRecipeIngredients({recipe}) {
     let ingredients = [];
     for (const ingredient of recipe.ingredients) {
-        ingredients.push(<TableRowIngredient ingredient={ingredient}/>)
+        ingredients.push(<TableRowIngredient key={ingredient.name} ingredient={ingredient}/>)
     }
     return ingredients;
 }
 
-function ListRecipeCategories({recipe}) {
+export function ListRecipeCategories({recipe}) {
     let categories = [];
     for (const category of recipe.categories) {
-        categories.push(<li key={categories.length}>{category}</li>)
+        categories.push(<li key={recipe.categories.indexOf(category)}>{category}</li>)
     }
     return categories;
 }
 
-function ListRecipeInstructions({recipe}) {
+export function ListRecipeInstructions({recipe}) {
     let instructions = [];
     for (const instruction of recipe.instructions) {
-        instructions.push(<li key={recipe.instructions.indexOf(instruction)}>{`${recipe.instructions.indexOf(instruction)+1}: ${instruction}`}</li>)
+        instructions.push(<li key={`instruction-${recipe.instructions.indexOf(instruction)}`}>{instruction}</li>)
     }
     return instructions;
 }

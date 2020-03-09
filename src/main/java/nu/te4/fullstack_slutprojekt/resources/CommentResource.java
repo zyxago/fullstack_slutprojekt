@@ -15,6 +15,8 @@ import javax.ws.rs.core.Response;
 import nu.te4.fullstack_slutprojekt.beans.CommentBean;
 import nu.te4.fullstack_slutprojekt.entities.Comment;
 
+import java.util.List;
+
 /**
  * @author erikh
  */
@@ -27,38 +29,57 @@ public class CommentResource {
     CommentBean commentBean;
 
     @GET
-    @Path("/comments")
-    public Response getComments() {
-        return null;
+    @Path("/comments/{parentId}")
+    public Response getComments(@PathParam("parentId") int parentId) {
+        List<Comment> comments = commentBean.getComments(parentId);
+        if (!comments.isEmpty()) {
+            return Response.status(Response.Status.OK).entity(comments).build();
+        }
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 
     @POST
     @Path("/comment")
     public Response addComment(Comment comment) {
-        return null;
+        if (commentBean.addComment(comment) > 0) {
+            return Response.status(Response.Status.CREATED).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @POST
     @Path("/comment/repport/{id}")
     public Response repportComment(@PathParam("id") int id) {
-        return null;
+        if (commentBean.repportComment(id) > 0) {
+            return Response.status(Response.Status.OK).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @POST
     @Path("/comment/like/{id}")
     public Response likeComment(@PathParam("id") int id) {
-        return null;
+        if (commentBean.likeComment(id) > 0) {
+            return Response.status(Response.Status.OK).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @PUT
-    @Path("/comment/{id}")
-    public Response modifyComment(@PathParam("id") int id) {
-        return null;
+    @Path("/comment")
+    public Response modifyComment(Comment comment) {
+        if (commentBean.modifyComment(comment) > 0) {
+            return Response.status(Response.Status.OK).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @DELETE
     @Path("/comment/{id}")
     public Response removeComment(@PathParam("id") int id) {
-        return null;
+        if (commentBean.removeComment(id) > 0) {
+            return Response.status(Response.Status.OK).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 }

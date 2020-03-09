@@ -11,12 +11,14 @@ package nu.te4.fullstack_slutprojekt.entities;
  */
 public class Comment extends Post{
     private int parentId;
+    private String username;
     private String text;
 
     public Comment(CommentBuilder builder){
         super(builder.getId(), builder.getLikes(), builder.getRepports(), builder.getWriterId());
         this.parentId = builder.getParentId();
         this.text = builder.getText();
+        this.username = builder.getUsername();
     }
 
     public Comment(){}
@@ -35,5 +37,13 @@ public class Comment extends Post{
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

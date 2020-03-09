@@ -12,7 +12,7 @@ export default function RecipeTable({mainPath, setSelectedRecipe}) {
     function PopulateTable({recipeList}) {
         const recipes = [];
         for (const recipe of recipeList) {
-            recipes.push(<RecipeBriefView recipe={recipe} setSelectedRecipe={setSelectedRecipe} mainPath={mainPath}/>)
+            recipes.push(<RecipeBriefView key={recipe.id} recipe={recipe} setSelectedRecipe={setSelectedRecipe} mainPath={mainPath}/>)
         }
         return recipes;
     }

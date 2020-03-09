@@ -6,8 +6,8 @@ import Recipe from "../../entities/Recipe";
  * @returns {Promise<void>}
  */
 export async function getRecipes(setRecipeList) {
-    const result = await fetch("/api/recipes");
-    const data = await result.json();
+    const res = await fetch("/fullstack_slutprojekt-1.0/api/recipes");
+    const data = await res.json();
     const recipes = [];
     if (data) {
         for (const recipeData of data) {
@@ -22,24 +22,26 @@ export async function getRecipes(setRecipeList) {
 }
 
 export async function likeRecipe(id) {
-    const result = await fetch(`/api/recipe/like/${id}`, {
+    const res = await fetch(`/fullstack_slutprojekt-1.0/api/recipe/like/${id}`, {
         method: "PUT",
         headers: {
+            'Authorization': window.localStorage.getItem("token"),
             'Content-Type': 'application/json'
         }
-    })
-    const data = await result.status;
+    });
+    const data = await res.status;
     console.log(data);
 }
 
 export async function reportRecipe(id) {
-    const result = await fetch(`/api/recipe/report/${id}`, {
+    const res = await fetch(`/fullstack_slutprojekt-1.0/api/recipe/report/${id}`, {
         method: "PUT",
         headers: {
+            'Authorization': window.localStorage.getItem("token"),
             'Content-Type': 'application/json'
         }
-    })
-    const data = await result.status;
+    });
+    const data = await res.status;
     console.log(data);
 }
 
@@ -50,8 +52,8 @@ export async function reportRecipe(id) {
  * @returns {Promise<void>}
  */
 export async function getRecipeImage(id, setRecipeImage) {
-    const result = await fetch(`/api/recipe/${id}/img`);
-    const data = await result.blob();
+    const res = await fetch(`/fullstack_slutprojekt-1.0/api/recipe/${id}/img`);
+    const data = await res.blob();
     setRecipeImage(URL.createObjectURL(data));
 }
 
@@ -61,32 +63,31 @@ export async function getRecipeImage(id, setRecipeImage) {
  * @returns {Promise<void>}
  */
 export async function postRecipe(recipe) {
-    //KOLLA I local storage efter användar token, skicka sedan med den i recipe
     const image = recipe.image;
     recipe.image = null;
-    recipe.writerId = 1;//TEMP
-    const result = await fetch("/api/recipe", {
+    const res = await fetch("/fullstack_slutprojekt-1.0/api/recipe", {
         method: "POST",
         headers: {
+            'Authorization': window.localStorage.getItem("token"),
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(recipe)
     });
-    const data = await result.json();
+    const data = await res.json();
     await postRecipeImage(data, image);
 }
 
 export async function updateRecipe(recipe){
-    //KOLLA I local storage efter användar token, skicka sedan med den i recipe
     recipe.image = null;
-    const result = await fetch(`/api/recipe`, {
+    const res = await fetch(`/fullstack_slutprojekt-1.0/api/recipe`, {
         method: "PUT",
         headers: {
+            'Authorization': window.localStorage.getItem("token"),
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(recipe)
     });
-    const data = await result.json();
+    const data = await res.json();
 }
 
 /**
@@ -96,12 +97,21 @@ export async function updateRecipe(recipe){
  * @returns {Promise<void>}
  */
 export async function postRecipeImage(id, image) {
-    const result = await fetch(`/api/recipe/${id}/img`, {
+    const res = await fetch(`/fullstack_slutprojekt-1.0/api/recipe/${id}/img`, {
         method: "PUT",
         headers: {
+            'Authorization': window.localStorage.getItem("token"),
             'Content-Type': 'application/octet-stream'
         },
         body: image
     });
-    const response = result.status;
+}
+
+export async function removeRecipe(id){
+    const res = await fetch(`/fullstack_slutprojekt-1.0/api/recipe/${id}/`, {
+        method: "DELETE",
+        headers:{
+            'Authorization': window.localStorage.getItem("token")
+        }
+    });
 }
