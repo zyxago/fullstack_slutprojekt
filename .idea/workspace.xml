@@ -7,36 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3eac87e9-b39f-4028-84d0-da76a2e7576f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/entities/User.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/resources/api/authentication.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/filters/AuthorizationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/filters/CORSFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Authentication.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Authentication.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/CommentList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CommentList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Ingredient.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Ingredient.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Nav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Nav.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/PostRecipe.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/PostRecipe.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Recipe.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Recipe.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/RecipeTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RecipeTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/entities/Comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/entities/Comment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/resources/api/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/resources/api/category.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/resources/api/comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/resources/api/comment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/resources/api/ingredient.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/resources/api/ingredient.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/resources/api/recipe.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/resources/api/recipe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/resources/css/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/resources/css/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/AuthenticationBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/AuthenticationBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/CommentBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/CommentBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/IngredientBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/IngredientBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/CommentBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/CommentBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/Ingredient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/entities/Ingredient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/resources/AuthenticationResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/resources/AuthenticationResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/resources/CommentResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/resources/CommentResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/nu/te4/fullstack_slutprojekt/entities/CommentBuilderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/nu/te4/fullstack_slutprojekt/entities/CommentBuilderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/RecipeBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/beans/RecipeBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/resources/RecipeResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nu/te4/fullstack_slutprojekt/resources/RecipeResource.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -298,11 +271,6 @@
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="JBoss Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="JBoss Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Running" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
             </expand>
             <select />
           </treeState>
@@ -340,7 +308,8 @@
       <workItem from="1583317430797" duration="1154000" />
       <workItem from="1583401441550" duration="5664000" />
       <workItem from="1583480276058" duration="10692000" />
-      <workItem from="1583742583082" duration="17297000" />
+      <workItem from="1583742583082" duration="17601000" />
+      <workItem from="1583834189665" duration="2749000" />
     </task>
     <servers />
   </component>
@@ -382,50 +351,50 @@
     </state>
     <state x="740" y="336" key="FileChooserDialogImpl/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583743854974" />
     <state x="987" y="417" key="FileChooserDialogImpl/0.0.2560.1440/-1920.247.1920.1080@0.0.2560.1440" timestamp="1581765151302" />
-    <state width="1877" height="437" key="GridCell.Tab.0.bottom" timestamp="1583765931994">
+    <state width="1877" height="396" key="GridCell.Tab.0.bottom" timestamp="1583766116356">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="437" key="GridCell.Tab.0.bottom/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583765931994" />
+    <state width="1877" height="396" key="GridCell.Tab.0.bottom/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583766116356" />
     <state width="1964" height="414" key="GridCell.Tab.0.bottom/0.0.2560.1440/-1920.247.1920.1080@0.0.2560.1440" timestamp="1583185579290" />
-    <state width="1877" height="437" key="GridCell.Tab.0.center" timestamp="1583765931994">
+    <state width="1877" height="396" key="GridCell.Tab.0.center" timestamp="1583766116356">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="437" key="GridCell.Tab.0.center/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583765931994" />
+    <state width="1877" height="396" key="GridCell.Tab.0.center/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583766116356" />
     <state width="1964" height="414" key="GridCell.Tab.0.center/0.0.2560.1440/-1920.247.1920.1080@0.0.2560.1440" timestamp="1583185579290" />
-    <state width="1877" height="437" key="GridCell.Tab.0.left" timestamp="1583765931994">
+    <state width="1877" height="396" key="GridCell.Tab.0.left" timestamp="1583766116355">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="437" key="GridCell.Tab.0.left/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583765931994" />
+    <state width="1877" height="396" key="GridCell.Tab.0.left/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583766116355" />
     <state width="1964" height="414" key="GridCell.Tab.0.left/0.0.2560.1440/-1920.247.1920.1080@0.0.2560.1440" timestamp="1583185579290" />
-    <state width="1877" height="437" key="GridCell.Tab.0.right" timestamp="1583765931994">
+    <state width="1877" height="396" key="GridCell.Tab.0.right" timestamp="1583766116356">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="437" key="GridCell.Tab.0.right/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583765931994" />
+    <state width="1877" height="396" key="GridCell.Tab.0.right/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583766116356" />
     <state width="1964" height="414" key="GridCell.Tab.0.right/0.0.2560.1440/-1920.247.1920.1080@0.0.2560.1440" timestamp="1583185579290" />
-    <state width="1458" height="362" key="GridCell.Tab.1.bottom" timestamp="1583748917124">
+    <state width="1877" height="396" key="GridCell.Tab.1.bottom" timestamp="1583766116357">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1458" height="362" key="GridCell.Tab.1.bottom/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583748917124" />
-    <state width="1458" height="362" key="GridCell.Tab.1.center" timestamp="1583748917124">
+    <state width="1877" height="396" key="GridCell.Tab.1.bottom/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583766116357" />
+    <state width="1877" height="396" key="GridCell.Tab.1.center" timestamp="1583766116357">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1458" height="362" key="GridCell.Tab.1.center/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583748917124" />
-    <state width="1458" height="362" key="GridCell.Tab.1.left" timestamp="1583748917124">
+    <state width="1877" height="396" key="GridCell.Tab.1.center/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583766116357" />
+    <state width="1877" height="396" key="GridCell.Tab.1.left" timestamp="1583766116357">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1458" height="362" key="GridCell.Tab.1.left/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583748917124" />
-    <state width="1458" height="362" key="GridCell.Tab.1.right" timestamp="1583748917124">
+    <state width="1877" height="396" key="GridCell.Tab.1.left/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583766116357" />
+    <state width="1877" height="396" key="GridCell.Tab.1.right" timestamp="1583766116357">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1458" height="362" key="GridCell.Tab.1.right/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583748917124" />
+    <state width="1877" height="396" key="GridCell.Tab.1.right/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583766116357" />
     <state x="440" y="155" key="SettingsEditor" timestamp="1583227968747">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="440" y="155" key="SettingsEditor/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583227968747" />
-    <state x="732" y="437" key="com.intellij.ide.util.TipDialog" timestamp="1583317430741">
+    <state x="732" y="437" key="com.intellij.ide.util.TipDialog" timestamp="1583834208080">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="732" y="437" key="com.intellij.ide.util.TipDialog/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583317430741" />
+    <state x="732" y="437" key="com.intellij.ide.util.TipDialog/0.0.1920.1160/-1920.0.1920.1160@0.0.1920.1160" timestamp="1583834208080" />
     <state x="976" y="543" key="com.intellij.ide.util.TipDialog/0.0.2560.1440/-1920.247.1920.1080@0.0.2560.1440" timestamp="1583181102280" />
     <state x="92" y="92" width="1736" height="976" key="dock-window-1" timestamp="1582808718950">
       <screen x="0" y="0" width="1920" height="1160" />

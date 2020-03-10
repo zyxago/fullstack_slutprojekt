@@ -82,8 +82,8 @@ public class RecipeResource {
     }
 
     @PUT
-    @Path("/recipe/report/{id}")
-    public Response reportRecipe(@PathParam("id") int id) {
+    @Path("/recipe/report/{id}/{userId}")
+    public Response reportRecipe(@PathParam("id") int id, @PathParam("userId") int userId) {
         if (recipeBean.reportRecipe(id) > 0) {
             return Response.status(Response.Status.OK).build();
         }
@@ -91,9 +91,9 @@ public class RecipeResource {
     }
 
     @PUT
-    @Path("/recipe/like/{id}")
-    public Response likeRecipe(@PathParam("id") int id) {
-        if (recipeBean.likeRecipe(id) > 0) {
+    @Path("/recipe/like/{id}/{userId}")
+    public Response likeRecipe(@PathParam("id") int id, @PathParam("userId") int userId) {
+        if (recipeBean.likeRecipe(id, userId) > 0) {
             return Response.status(Response.Status.OK).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();

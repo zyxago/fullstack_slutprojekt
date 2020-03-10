@@ -89,11 +89,10 @@ public class RecipeBean {
     public int addRecipe(Recipe recipe) {
         int recipeId = 0;
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO recipe VALUES(null, ?, ?, null, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO recipe VALUES(null, ?, ?, null, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, recipe.getTitle());
             stmt.setInt(2, recipe.getWriterId());
             stmt.setString(3, recipe.getInformation());
-            stmt.setInt(4, statsBean.insertStats());
             if (stmt.executeUpdate() > 0) {
                 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
@@ -130,10 +129,11 @@ public class RecipeBean {
         }
     }
 
-    public int likeRecipe(int id) {
+    public int likeRecipe(int id, int userId) {
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("UPDATE stats SET likes = likes+1 WHERE id IN (SELECT stats_id FROM recipe WHERE id = ?)");
-            stmt.setInt(1, id);
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO user_likes_recipe VALUES(?, ?)");
+            stmt.setInt(1, userId);
+            stmt.setInt(2, id);
             return stmt.executeUpdate();
         } catch (Exception e) {
             LOGGER.error("Error in RecipeBean.likeRecipe: " + e.getMessage());
@@ -141,10 +141,11 @@ public class RecipeBean {
         }
     }
 
-    public int reportRecipe(int id) {
+    public int reportRecipe(int id, int userId) {
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("UPDATE stats SET reports = reports+1 WHERE id IN (SELECT stats_id FROM recipe WHERE id = ?)");
-            stmt.setInt(1, id);
+            PreparedStatement stmt = conn.prepareStatement("INSERTO INTO user_reports_recipe VALUES(?, ?)");
+            stmt.setInt(1, userId);
+            stmt.setInt(2, id);
             return stmt.executeUpdate();
         } catch (Exception e) {
             LOGGER.error("Error in RecipeBean.reportRecipe: " + e.getMessage());
