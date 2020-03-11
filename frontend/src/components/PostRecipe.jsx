@@ -34,7 +34,7 @@ export default function PostRecipe({modifyRecipe, user}) {
 
     function parseIngredient() {
         const name = document.getElementById("newIngredient").value;
-        const amount = document.getElementById("amount").value;
+        const amount = document.getElementById("amount").valueAsNumber;
         const measurement = document.getElementById("newMeasurement").value;
         let newRecipe = recipe;
         newRecipe.ingredients.push(new Ingredient(name, amount, measurement));
@@ -140,6 +140,7 @@ export default function PostRecipe({modifyRecipe, user}) {
     }
 
     function sendRecipe() {
+        document.getElementById("submitButton").disabled = true;
         let title = document.getElementById("title");
         let information = document.getElementById("info");
         recipe.title = title.value !== title.placeholder && title.value !== "" ? title.value : title.placeholder;
@@ -204,7 +205,7 @@ export default function PostRecipe({modifyRecipe, user}) {
                 <button onClick={() => setShowCategory(true)} className="button is-primary">Add Category</button>
 
                 <br/>
-                <button onClick={() => sendRecipe()} className="button is-primary">Post Recipe</button>
+                <button onClick={() => sendRecipe()} id="submitButton" className="button is-primary">Post Recipe</button>
             </form>
         </Box>
     )

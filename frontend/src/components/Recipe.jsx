@@ -1,12 +1,11 @@
 import React from "react";
-import Recipe from "../entities/Recipe";
-import {Card, Content, Media, Table} from "react-bulma-components";
+import {Card, Content, Media, Table, Level} from "react-bulma-components";
 import {TableRowIngredient} from "./Ingredient";
 import "../resources/css/recipe.scss";
 import {Link} from "react-router-dom";
 import {likeRecipe, removeRecipe, reportRecipe} from "../resources/api/recipe";
 import CommentList from "./CommentList";
-import {postComment} from "../resources/api/comment";
+import {submitComment} from "../logic/comment";
 
 /**
  *
@@ -18,15 +17,8 @@ import {postComment} from "../resources/api/comment";
  */
 export function RecipeFullView({recipe, mainPath, user}) {
 
-    function submitComment() {
-        let text = document.getElementById("comment").value;
-        let comment = {
-            writerId: user.id,
-            text: text,
-            username: user.username,
-            parentId: recipe.id
-        };
-        postComment(comment);
+    if (user === undefined) {
+        user = false;
     }
 
     function deleteRecipe(id) {
@@ -37,16 +29,36 @@ export function RecipeFullView({recipe, mainPath, user}) {
         <Card>
             <Card.Content>
                 <Card.Header>
-                    <h2>{recipe.title}</h2>
-                    {user && <>
-                        <button className="button" onClick={() => likeRecipe(recipe.id)}>Like {recipe.likes}</button>
-                        <button className="button" onClick={() => reportRecipe(recipe.id)}>Report</button>
-                    </>}
-                    {user.id === recipe.writerId && <>
-                        <Link className="button" to={`${mainPath}/postRecipe`}>Edit</Link>
-                        <button className="button" onClick={() => deleteRecipe(recipe.id)}>Remove Recipe</button>
-                    </>}
-
+                    <Level renderAs="div">
+                        <Level.Side align="left">
+                            <Level.Item>
+                                <h2>{recipe.title}</h2>
+                            </Level.Item>
+                        </Level.Side>
+                        <Level.Side align="right">
+                            {user && <>
+                                <Level.Item>
+                                    <button className="button"
+                                            onClick={() => likeRecipe(recipe.id, user.id)}>Like {recipe.likes}</button>
+                                </Level.Item>
+                                <Level.Item>
+                                    <button className="button"
+                                            onClick={() => reportRecipe(recipe.id, user.id)}>Report
+                                    </button>
+                                </Level.Item>
+                                {user.id === recipe.writerId && <>
+                                    <Level.Item>
+                                        <Link className="button" to={`${mainPath}/editRecipe`}>Edit</Link>
+                                    </Level.Item>
+                                    <Level.Item>
+                                        <button className="button" onClick={() => deleteRecipe(recipe.id)}>Remove
+                                            Recipe
+                                        </button>
+                                    </Level.Item>
+                                </>}
+                            </>}
+                        </Level.Side>
+                    </Level>
                 </Card.Header>
                 <Content>
                     <Media>
@@ -70,10 +82,14 @@ export function RecipeFullView({recipe, mainPath, user}) {
                     <p>Categories</p>
                     <ul><ListRecipeCategories recipe={recipe}/></ul>
                     <ol><ListRecipeInstructions recipe={recipe}/></ol>
-                    <div>Comments</div>
-                    <input className="input" type="text" placeholder="Say something..." id="comment"/>
-                    <button className="button" onClick={submitComment}>Comment</button>
-                    <CommentList recipeId={recipe.id}/>
+                    <h4>Comments</h4>
+                    {user && <>
+                        <input className="input" type="text" placeholder="Say something..." id="commentInput"/>
+                        <button className="button"
+                                onClick={() => submitComment(document.getElementById("commentInput").value, user, recipe.id)}>Comment
+                        </button>
+                    </>}
+                    <CommentList parentId={recipe.id} user={user}/>
                 </Content>
             </Card.Content>
         </Card>

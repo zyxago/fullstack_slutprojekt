@@ -84,7 +84,7 @@ public class RecipeResource {
     @PUT
     @Path("/recipe/report/{id}/{userId}")
     public Response reportRecipe(@PathParam("id") int id, @PathParam("userId") int userId) {
-        if (recipeBean.reportRecipe(id) > 0) {
+        if (recipeBean.reportRecipe(id, userId) > 0) {
             return Response.status(Response.Status.OK).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();

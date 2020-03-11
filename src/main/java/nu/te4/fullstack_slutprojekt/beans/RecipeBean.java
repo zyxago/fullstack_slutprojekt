@@ -30,8 +30,6 @@ public class RecipeBean {
     CategoryBean categoryBean;
     @EJB
     InstructionBean instructionBean;
-    @EJB
-    StatsBean statsBean;
 
     public List<Recipe> getRecipes() {
         LOGGER.debug("Getting recipes.");
@@ -131,7 +129,7 @@ public class RecipeBean {
 
     public int likeRecipe(int id, int userId) {
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO user_likes_recipe VALUES(?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO user_like VALUES(?, ?)");
             stmt.setInt(1, userId);
             stmt.setInt(2, id);
             return stmt.executeUpdate();
@@ -143,7 +141,7 @@ public class RecipeBean {
 
     public int reportRecipe(int id, int userId) {
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERTO INTO user_reports_recipe VALUES(?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO user_report VALUES(?, ?)");
             stmt.setInt(1, userId);
             stmt.setInt(2, id);
             return stmt.executeUpdate();

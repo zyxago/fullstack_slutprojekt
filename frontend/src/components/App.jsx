@@ -31,7 +31,8 @@ export default function App() {
                 <Content>
                     <Switch>
                         <Route exact path={mainPath}><RecipeTable mainPath={mainPath} setSelectedRecipe={setSelectedRecipe} signedIn={user}/></Route>
-                        {user && <Route path={`${mainPath}/postRecipe`}><PostRecipe modifyRecipe={selectedRecipe} user={user}/></Route>}
+                        {user && <Route path={`${mainPath}/postRecipe`}><PostRecipe user={user}/></Route>}
+                        {user && <Route path={`${mainPath}/editRecipe`}><PostRecipe modifyRecipe={selectedRecipe} user={user}/></Route>}
                         <Route path={`${mainPath}/${selectedRecipe.title}`}><RecipeFullView recipe={selectedRecipe} mainPath={mainPath} user={user}/></Route>
                         <Redirect to={mainPath}/>
                     </Switch>

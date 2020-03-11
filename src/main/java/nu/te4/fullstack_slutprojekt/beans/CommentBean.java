@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import nu.te4.fullstack_slutprojekt.ConnectionFactory;
@@ -21,9 +20,6 @@ import org.slf4j.LoggerFactory;
 public class CommentBean {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CommentBean.class);
-
-    @EJB
-    StatsBean statsBean;
 
     public List<Comment> getComments(int recipeId) {
         List<Comment> comments = new ArrayList<>();
@@ -50,32 +46,61 @@ public class CommentBean {
 
     public int addComment(Comment comment) {
         try (Connection conn = new ConnectionFactory().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO comment VALUES(null, ?, ?, ?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO comment VALUES(null, ?, ?, ?)");
             stmt.setString(1, comment.getText());
             stmt.setInt(2, comment.getParentId());
-            stmt.setInt(3, statsBean.insertStats());
-            stmt.setInt(4, comment.getWriterId());
+            stmt.setInt(3, comment.getWriterId());
             return stmt.executeUpdate();
         } catch (Exception e) {
             LOGGER.error("Error in CommentBean.addComment: " + e.getMessage());
+            return 0;
         }
-        return 0;
     }
 
     public int modifyComment(Comment comment) {
-        return 0;
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE comment SET text = ? WHERE id = ?");
+            stmt.setString(1, comment.getText());
+            stmt.setInt(2, comment.getId());
+            return stmt.executeUpdate();
+        } catch (Exception e) {
+            LOGGER.error("Error in CommentBean.modifyComment: " + e.getMessage());
+            return 0;
+        }
     }
 
-    public int likeComment(int id) {
-        return 0;
+    public int likeComment(int id, int userId) {
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO user_like VALUES(?, ?)");
+            stmt.setInt(1, userId);
+            stmt.setInt(2, id);
+            return stmt.executeUpdate();
+        } catch (Exception e) {
+            LOGGER.error("Error in CommentBean.likeComment: " + e.getMessage());
+            return 0;
+        }
     }
 
-    public int repportComment(int id) {
-        return 0;
+    public int reportComment(int id, int userId) {
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO user_report VALUES(?, ?)");
+            stmt.setInt(1, userId);
+            stmt.setInt(2, id);
+            return stmt.executeUpdate();
+        } catch (Exception e) {
+            LOGGER.error("Error in CommentBean.reportComment: " + e.getMessage());
+            return 0;
+        }
     }
 
     public int removeComment(int id) {
-        return 0;
+        try (Connection conn = new ConnectionFactory().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM comment WHERE id = ?");
+            stmt.setInt(1, id);
+            return stmt.executeUpdate();
+        } catch (Exception e) {
+            LOGGER.error("Error in CommentBean.removeComment: " + e.getMessage());
+            return 0;
+        }
     }
-
 }

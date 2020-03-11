@@ -47,19 +47,19 @@ public class CommentResource {
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
-    @POST
-    @Path("/comment/repport/{id}")
-    public Response repportComment(@PathParam("id") int id) {
-        if (commentBean.repportComment(id) > 0) {
+    @PUT
+    @Path("/comment/report/{id}/{userId}")
+    public Response reportComment(@PathParam("id") int id, @PathParam("userId") int userId) {
+        if (commentBean.reportComment(id, userId) > 0) {
             return Response.status(Response.Status.OK).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
-    @POST
-    @Path("/comment/like/{id}")
-    public Response likeComment(@PathParam("id") int id) {
-        if (commentBean.likeComment(id) > 0) {
+    @PUT
+    @Path("/comment/like/{id}/{userId}")
+    public Response likeComment(@PathParam("id") int id, @PathParam("userId") int userId) {
+        if (commentBean.likeComment(id, userId) > 0) {
             return Response.status(Response.Status.OK).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();

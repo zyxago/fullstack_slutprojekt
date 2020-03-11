@@ -21,27 +21,27 @@ export async function getRecipes(setRecipeList) {
     setRecipeList(recipes);
 }
 
-export async function likeRecipe(id) {
-    const res = await fetch(`/fullstack_slutprojekt-1.0/api/recipe/like/${id}`, {
+export async function likeRecipe(id, userId) {
+    const res = await fetch(`/fullstack_slutprojekt-1.0/api/recipe/like/${id}/${userId}`, {
         method: "PUT",
         headers: {
             'Authorization': window.localStorage.getItem("token"),
             'Content-Type': 'application/json'
         }
     });
-    const data = await res.status;
+    const data = res.status;
     console.log(data);
 }
 
-export async function reportRecipe(id) {
-    const res = await fetch(`/fullstack_slutprojekt-1.0/api/recipe/report/${id}`, {
+export async function reportRecipe(id, userId) {
+    const res = await fetch(`/fullstack_slutprojekt-1.0/api/recipe/report/${id}/${userId}`, {
         method: "PUT",
         headers: {
             'Authorization': window.localStorage.getItem("token"),
             'Content-Type': 'application/json'
         }
     });
-    const data = await res.status;
+    const data = res.status;
     console.log(data);
 }
 
@@ -87,7 +87,12 @@ export async function updateRecipe(recipe){
         },
         body: JSON.stringify(recipe)
     });
-    const data = await res.json();
+    let status = res.status;
+    if(status === 200){
+        alert("Recipe Updated!");
+    }else{
+        alert(("Failed to update recipe!"));
+    }
 }
 
 /**
@@ -105,6 +110,12 @@ export async function postRecipeImage(id, image) {
         },
         body: image
     });
+    let status = res.status;
+    if(status === 201){
+        alert("Recipe Posted!");
+    }else{
+        alert(("Failed to post recipe!"));
+    }
 }
 
 export async function removeRecipe(id){
@@ -114,4 +125,10 @@ export async function removeRecipe(id){
             'Authorization': window.localStorage.getItem("token")
         }
     });
+    let status = res.status;
+    if(status === 200){
+        alert("Recipe Removed!");
+    }else{
+        alert(("Failed to remove recipe!"));
+    }
 }

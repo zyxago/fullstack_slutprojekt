@@ -1,21 +1,24 @@
 import React from "react";
 import {getComments} from "../resources/api/comment";
-import {Media} from "react-bulma-components";
+import {Media, Box} from "react-bulma-components";
+import Comment from "./Comment";
 
-export default function CommentList({recipeId}) {
+export default function CommentList({parentId, user}) {
 
     const [comments, setComments] = React.useState([]);
     React.useEffect(() => {
-        getComments(recipeId, setComments)
+        getComments(parentId, setComments)
     }, []);
 
     function ListComments({comments}) {
         return comments.map((comment, index) => {
-            return <Media key={`comment-${index}`}>
-                <Media.Content>
-                    <Media.Item> {`${comment.username}: ${comment.text}`}</Media.Item>
-                </Media.Content>
-            </Media>
+            return <Box key={`comment-${index}`}>
+                <Media>
+                    <Media.Content>
+                        <Media.Item><Comment comment={comment} user={user}/></Media.Item>
+                    </Media.Content>
+                </Media>
+            </Box>
         })
     }
 
