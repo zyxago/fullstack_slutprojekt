@@ -12,6 +12,7 @@ export default class Recipe {
             this.likes = recipeData.likes;
             this.reports = recipeData.reports;
             this.title = recipeData.title;
+            this.writer = recipeData.writer;
         } else{
             this.writerId = 0;
             this.image = "";
@@ -22,6 +23,7 @@ export default class Recipe {
             this.likes = 0;
             this.reports = 0;
             this.title = "";
+            this.writer = "";
         }
     }
 }

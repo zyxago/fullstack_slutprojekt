@@ -1,27 +1,6 @@
 import React from "react";
 import {Content, Modal} from "react-bulma-components";
 
-export function SignUp() {
-
-    const [show, setShow] = React.useState(false);
-
-    return <><span onClick={()=>setShow(true)}>Sign Up</span>
-        <Modal show={show} onClose={() => setShow(false)}>
-            <Modal.Card>
-                <Modal.Card.Head>
-                    <Modal.Card.Title>
-                        Sign Up
-                    </Modal.Card.Title>
-                </Modal.Card.Head>
-                <Modal.Card.Body>
-                    <Content>
-                    </Content>
-                </Modal.Card.Body>
-            </Modal.Card>
-        </Modal>
-    </>
-}
-
 export function SignIn() {
 
     const [show, setShow] = React.useState(false);
@@ -42,7 +21,6 @@ export function SignIn() {
             </Modal.Card>
         </Modal>
     </>
-
 }
 
 export function SignOut({setUser}) {

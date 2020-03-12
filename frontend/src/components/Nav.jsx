@@ -1,10 +1,10 @@
 import React from "react";
 import {Navbar} from "react-bulma-components";
 import {Link} from "react-router-dom";
-import {SignIn, SignOut, SignUp} from "./Authentication";
+import {SignIn, SignOut} from "./Authentication";
 import "../resources/css/nav.scss";
 
-export default function Nav(props){
+export default function Nav(props) {
     return (
         <Navbar>
             <Navbar.Menu className="is-active">
@@ -22,9 +22,6 @@ export default function Nav(props){
                         : <>
                             <Navbar.Item>
                                 <SignIn/>
-                            </Navbar.Item>
-                            <Navbar.Item>
-                                <SignUp/>
                             </Navbar.Item>
                         </>}
                 </Navbar.Container>

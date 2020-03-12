@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, Content, Media, Table, Level} from "react-bulma-components";
+import {Card, Content, Media, Table} from "react-bulma-components";
 import {TableRowIngredient} from "./Ingredient";
 import "../resources/css/recipe.scss";
 import {Link} from "react-router-dom";
@@ -22,51 +22,37 @@ export function RecipeFullView({recipe, mainPath, user}) {
     }
 
     function deleteRecipe(id) {
-        removeRecipe(id);
+        removeRecipe(id, mainPath);
     }
 
     return (
         <Card>
             <Card.Content>
                 <Card.Header>
-                    <Level renderAs="div">
-                        <Level.Side align="left">
-                            <Level.Item>
-                                <h2>{recipe.title}</h2>
-                            </Level.Item>
-                        </Level.Side>
-                        <Level.Side align="right">
-                            {user && <>
-                                <Level.Item>
-                                    <button className="button"
-                                            onClick={() => likeRecipe(recipe.id, user.id)}>Like {recipe.likes}</button>
-                                </Level.Item>
-                                <Level.Item>
-                                    <button className="button"
-                                            onClick={() => reportRecipe(recipe.id, user.id)}>Report
-                                    </button>
-                                </Level.Item>
-                                {user.id === recipe.writerId && <>
-                                    <Level.Item>
-                                        <Link className="button" to={`${mainPath}/editRecipe`}>Edit</Link>
-                                    </Level.Item>
-                                    <Level.Item>
-                                        <button className="button" onClick={() => deleteRecipe(recipe.id)}>Remove
-                                            Recipe
-                                        </button>
-                                    </Level.Item>
-                                </>}
-                            </>}
-                        </Level.Side>
-                    </Level>
+                    <h2 className="header-left"><strong>{recipe.title}</strong>{` av ${recipe.writer}`}</h2>
+                    <div className="header-right">
+                    {user && <>
+                        <button className="button"
+                                onClick={() => likeRecipe(recipe.id, user.id, mainPath)}>Like {recipe.likes}</button>
+                        <button className="button"
+                                onClick={() => reportRecipe(recipe.id, user.id, mainPath)}>Report
+                        </button>
+                        {user.id === recipe.writerId && <>
+                            <Link className="button" to={`${mainPath}/editRecipe`}>Edit</Link>
+                            <button className="button" onClick={() => deleteRecipe(recipe.id, mainPath)}>Remove
+                                Recipe
+                            </button>
+                        </>}
+                    </>}
+                    </div>
                 </Card.Header>
                 <Content>
                     <Media>
                         <Media.Item>
-                            <img src={recipe.image} href={"No image found"}/>
+                            <img src={recipe.image} alt=""/>
                         </Media.Item>
                     </Media>
-                    <p>Description: {recipe.information}</p>
+                    <p><strong>Description: </strong>{recipe.information}</p>
                     <Table>
                         <thead>
                         <tr>
@@ -79,17 +65,18 @@ export function RecipeFullView({recipe, mainPath, user}) {
                         <TableRowRecipeIngredients recipe={recipe}/>
                         </tbody>
                     </Table>
-                    <p>Categories</p>
+                    <p><strong>Categories</strong></p>
                     <ul><ListRecipeCategories recipe={recipe}/></ul>
+                    <p><strong>Instructions</strong></p>
                     <ol><ListRecipeInstructions recipe={recipe}/></ol>
                     <h4>Comments</h4>
                     {user && <>
                         <input className="input" type="text" placeholder="Say something..." id="commentInput"/>
                         <button className="button"
-                                onClick={() => submitComment(document.getElementById("commentInput").value, user, recipe.id)}>Comment
+                                onClick={() => submitComment(document.getElementById("commentInput").value, user, recipe.id, mainPath)}>Comment
                         </button>
                     </>}
-                    <CommentList parentId={recipe.id} user={user}/>
+                    <CommentList parentId={recipe.id} user={user} mainPath={mainPath}/>
                 </Content>
             </Card.Content>
         </Card>
@@ -102,14 +89,16 @@ export function RecipeBriefView({recipe, setSelectedRecipe, mainPath}) {
             <Card.Content>
                 <Content>
                     <h2 onClick={() => setSelectedRecipe(recipe)}><Link
-                        to={`${mainPath}/${recipe.title}`}>{recipe.title}</Link></h2>
+                        to={`${mainPath}/${recipe.title}`}><strong>{recipe.title}</strong>{` av ${recipe.writer}`}
+                    </Link>
+                    </h2>
                     <Media>
                         <Media.Item>
-                            <img src={recipe.image} href={"No image found"}/>
+                            <img src={recipe.image} alt=""/>
                         </Media.Item>
                     </Media>
-                    <p>Description: {recipe.information}</p>
-                    <p>Categories</p>
+                    <p><strong>Description: </strong>{recipe.information}</p>
+                    <p><strong>Categories</strong></p>
                     <ul><ListRecipeCategories recipe={recipe}/></ul>
                 </Content>
             </Card.Content>

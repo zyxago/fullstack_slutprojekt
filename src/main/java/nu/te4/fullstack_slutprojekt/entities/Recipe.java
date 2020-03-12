@@ -19,6 +19,7 @@ public class Recipe extends Post {
     private List<Ingredient> ingredients;
     private List<String> categories;
     private int id;
+    private String writer;
 
     public Recipe(RecipeBuilder builder) {
         super(builder.getId(), builder.getLikes(), builder.getReports(), builder.getWriterId());
@@ -29,6 +30,7 @@ public class Recipe extends Post {
         this.ingredients = builder.getIngredients();
         this.categories = builder.getCategories();
         this.id = builder.getId();
+        this.writer = builder.getWriter();
     }
 
     public Recipe(){}
@@ -79,5 +81,23 @@ public class Recipe extends Post {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getWriter() {
+        return writer;
+    }
+
+    public void setWriter(String writer) {
+        this.writer = writer;
     }
 }

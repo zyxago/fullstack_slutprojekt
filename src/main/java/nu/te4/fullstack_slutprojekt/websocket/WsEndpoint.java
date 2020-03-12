@@ -1,5 +1,8 @@
 package nu.te4.fullstack_slutprojekt.websocket;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -12,20 +15,33 @@ import java.util.Set;
 public class WsEndpoint {
 
     private static final Set<Session> SESSIONS = new HashSet<>();
+    private static final Logger LOGGER = LoggerFactory.getLogger(WsEndpoint.class);
 
-    @OnMessage
-    public void onMessage(Session user, String message) {
-
+    public static void recipeUpdate() {
+        try {
+            for (Session session : SESSIONS) {
+                session.getBasicRemote().sendText("recipeUpdate");
+            }
+        } catch (Exception e) {
+            LOGGER.error("Error in WsEndpoint.recipeUpdate: " + e.getMessage());
+        }
     }
 
-    @OnOpen
-    public void onOpen(Session user) {
-        SESSIONS.add(user);
-    }
+        @OnMessage
+        public void onMessage (Session user, String message){
 
-    @OnClose
-    public void onClose(Session user) {
-        SESSIONS.remove(user);
-    }
+        }
 
-}
+        @OnOpen
+        public void onOpen (Session user){
+            SESSIONS.add(user);
+            LOGGER.info("New session established");
+        }
+
+        @OnClose
+        public void onClose (Session user){
+            SESSIONS.remove(user);
+            LOGGER.info("A session was closed");
+        }
+
+    }

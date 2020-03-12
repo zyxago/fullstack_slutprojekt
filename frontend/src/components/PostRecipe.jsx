@@ -9,27 +9,48 @@ import {getIngredients, getMeasurements} from "../resources/api/ingredient";
 
 let imageData = undefined;
 
-export default function PostRecipe({modifyRecipe, user}) {
+export default function PostRecipe({modifyRecipe, user, mainPath}) {
 
     const [categories, setCategories] = React.useState([]);
     const [ingredients, setIngredients] = React.useState([]);
     const [measurements, setMeasurements] = React.useState([]);
-    const [showInstruction, setShowInstruction] = React.useState(false);
-    const [showIngredient, setShowIngredient] = React.useState(false);
-    const [showCategory, setShowCategory] = React.useState(false);
+
+    const [showAddInstruction, setShowAddInstruction] = React.useState(false);
+    const [showRemoveInstruction, setShowRemoveInstruction] = React.useState(false);
+
+    const [showAddIngredient, setShowAddIngredient] = React.useState(false);
+    const [showRemoveIngredient, setShowRemoveIngredient] = React.useState(false);
+
+    const [showAddCategory, setShowAddCategory] = React.useState(false);
+    const [showRemoveCategory, setShowRemoveCategory] = React.useState(false);
+
     const [recipe, setRecipe] = React.useState(modifyRecipe || new Recipe());
 
-    React.useEffect(() => {getCategories(setCategories)}, []);
-    React.useEffect(() => {getIngredients(setIngredients)}, []);
-    React.useEffect(() => {getMeasurements(setMeasurements)}, []);
+    React.useEffect(() => {
+        getCategories(setCategories, mainPath)
+    }, []);
+    React.useEffect(() => {
+        getIngredients(setIngredients, mainPath)
+    }, []);
+    React.useEffect(() => {
+        getMeasurements(setMeasurements, mainPath)
+    }, []);
 
+    function checkInput(e) {
+        let element = e.target;
+        if (element.value !== "") {
+            element.classList.remove("is-danger");
+        } else {
+            element.classList.add("is-danger");
+        }
+    }
 
     function parseInstruction() {
         const text = document.getElementById("inputInstruction").value;
         let newRecipe = recipe;
         newRecipe.instructions.push(text);
         setRecipe(newRecipe);
-        setShowInstruction(false);
+        setShowAddInstruction(false);
     }
 
     function parseIngredient() {
@@ -39,7 +60,7 @@ export default function PostRecipe({modifyRecipe, user}) {
         let newRecipe = recipe;
         newRecipe.ingredients.push(new Ingredient(name, amount, measurement));
         setRecipe(newRecipe);
-        setShowIngredient(false);
+        setShowAddIngredient(false);
     }
 
     function parseCategory() {
@@ -47,12 +68,12 @@ export default function PostRecipe({modifyRecipe, user}) {
         let newRecipe = recipe;
         newRecipe.categories.push(name);
         setRecipe(newRecipe);
-        setShowCategory(false);
+        setShowAddCategory(false);
     }
 
     function AddInstruction() {
         return (
-            <Modal show={showInstruction} onClose={() => setShowInstruction(false)}>
+            <Modal show={showAddInstruction} onClose={() => setShowAddInstruction(false)}>
                 <Modal.Card>
                     <Modal.Card.Head>
                         <Modal.Card.Title>
@@ -62,7 +83,7 @@ export default function PostRecipe({modifyRecipe, user}) {
                     <Modal.Card.Body>
                         <Content>
                             <label className={"label"} htmlFor={"inputInstruction"}>Instruction: </label>
-                            <textarea className="textarea" id="inputInstruction"/>
+                            <textarea className="textarea is-danger" id="inputInstruction" onChange={checkInput}/>
 
                             <button className="button is-primary"
                                     onClick={() => parseInstruction("inputInstruction")}>Add
@@ -76,7 +97,7 @@ export default function PostRecipe({modifyRecipe, user}) {
 
     function AddIngredient() {
         return (
-            <Modal show={showIngredient} onClose={() => setShowIngredient(false)}>
+            <Modal show={showAddIngredient} onClose={() => setShowAddIngredient(false)}>
                 <Modal.Card>
                     <Modal.Card.Head>
                         <Modal.Card.Title>
@@ -86,14 +107,17 @@ export default function PostRecipe({modifyRecipe, user}) {
                     <Modal.Card.Body>
                         <Content>
                             <label className="label" htmlFor="newIngredient">Ingredient: </label>
-                            <input className="input" id="newIngredient" placeholder="New Ingredient..."
+                            <input onChange={checkInput} className="input is-danger" id="newIngredient"
+                                   placeholder="New Ingredient..."
                                    list="ingredientList"/>
                             <datalist id="ingredientList">
                                 <FillDatalist list={ingredients}/>
                             </datalist>
-                            <input className="input" type="number" placeholder="Amount..." step="0.1" min="0"
+                            <input onChange={checkInput} className="input is-danger" type="number"
+                                   placeholder="Amount..." step="0.1" min="0"
                                    max="10000" id="amount"/>
-                            <input className="input" list="measurementList" id="newMeasurement"/>
+                            <input onChange={checkInput} className="input is-danger" list="measurementList"
+                                   id="newMeasurement"/>
                             <datalist id="measurementList">
                                 <FillDatalist list={measurements}/>
                             </datalist>
@@ -109,7 +133,7 @@ export default function PostRecipe({modifyRecipe, user}) {
 
     function AddCategory() {
         return (
-            <Modal show={showCategory} onClose={() => setShowCategory(false)}>
+            <Modal show={showAddCategory} onClose={() => setShowAddCategory(false)}>
                 <Modal.Card>
                     <Modal.Card.Head>
                         <Modal.Card.Title>
@@ -119,12 +143,94 @@ export default function PostRecipe({modifyRecipe, user}) {
                     <Modal.Card.Body>
                         <Content>
                             <label className="label" htmlFor="newCategory">Category: </label>
-                            <input className="input" list="categoryList" id="newCategory"/>
+                            <input onChange={checkInput} className="input is-danger" list="categoryList"
+                                   id="newCategory"/>
                             <datalist id="categoryList">
                                 <FillDatalist list={categories}/>
                             </datalist>
                             <button className="button is-primary"
                                     onClick={() => parseCategory("newCategory")}>Add
+                            </button>
+                        </Content>
+                    </Modal.Card.Body>
+                </Modal.Card>
+            </Modal>
+        )
+    }
+
+    function RemoveInstruction() {
+        return (
+            <Modal show={showRemoveInstruction} onClose={() => setShowRemoveInstruction(false)}>
+                <Modal.Card>
+                    <Modal.Card.Head>
+                        <Modal.Card.Title>
+                            Remove Instruction
+                        </Modal.Card.Title>
+                    </Modal.Card.Head>
+                    <Modal.Card.Body>
+                        <Content>
+                            <ul>
+                                {recipe.instructions.map((instruction, index) => {
+                                    return <li key={index}><input type="checkbox"
+                                                                  id={`instruction${index}`}/>{instruction}</li>
+                                })}
+                            </ul>
+                            <button className="button" onClick={() => removeMarkedUnits("instruction")}>Remove marked
+                                Instructions
+                            </button>
+                        </Content>
+                    </Modal.Card.Body>
+                </Modal.Card>
+            </Modal>
+        )
+    }
+
+    function RemoveIngredient() {
+        return (
+            <Modal show={showRemoveIngredient} onClose={() => setShowRemoveIngredient(false)}>
+                <Modal.Card>
+                    <Modal.Card.Head>
+                        <Modal.Card.Title>
+                            Remove Ingredients
+                        </Modal.Card.Title>
+                    </Modal.Card.Head>
+                    <Modal.Card.Body>
+                        <Content>
+                            <ul>
+                                {recipe.ingredients.map((ingredient, index) => {
+                                    return <li key={index}><input type="checkbox"
+                                                                  id={`ingredient${index}`}/>{ingredient.name}</li>
+                                })}
+                            </ul>
+                            <button className="button" onClick={() => removeMarkedUnits("ingredient")}>Remove marked
+                                Ingredients
+                            </button>
+                        </Content>
+                    </Modal.Card.Body>
+                </Modal.Card>
+            </Modal>
+        )
+    }
+
+    function RemoveCategory() {
+        return (
+            <Modal show={showRemoveCategory} onClose={() => setShowRemoveCategory(false)}>
+                <Modal.Card>
+                    <Modal.Card.Head>
+                        <Modal.Card.Title>
+                            Remove Categories
+                        </Modal.Card.Title>
+                    </Modal.Card.Head>
+                    <Modal.Card.Body>
+                        <Content>
+                            <ul>
+                                {recipe.categories.map((category, index) => {
+                                    return <li key={index}><input type="checkbox" id={`category${index}`}/>{category}
+                                    </li>
+                                })}
+                            </ul>
+                            <button className="button" onClick={() => removeMarkedUnits("category")}>Remove marked
+                                Categories
                             </button>
                         </Content>
                     </Modal.Card.Body>
@@ -139,6 +245,31 @@ export default function PostRecipe({modifyRecipe, user}) {
         });
     }
 
+    function removeMarkedUnits(identifier) {
+        if (identifier === "instruction") {
+            for (let i = 0; i < recipe.instructions.length; i++) {
+                if (document.getElementById(`${identifier}${i}`).checked) {
+                    recipe.instructions.splice(i, 1);
+                }
+            }
+            setShowRemoveInstruction(false);
+        } else if (identifier === "ingredient") {
+            for (let i = 0; i < recipe.ingredients.length; i++) {
+                if (document.getElementById(`${identifier}${i}`).checked) {
+                    recipe.ingredients.splice(i, 1);
+                }
+            }
+            setShowRemoveIngredient(false);
+        } else if (identifier === "category") {
+            for (let i = 0; i < recipe.categories.length; i++) {
+                if (document.getElementById(`${identifier}${i}`).checked) {
+                    recipe.categories.splice(i, 1);
+                }
+            }
+            setShowRemoveCategory(false);
+        }
+    }
+
     function sendRecipe() {
         document.getElementById("submitButton").disabled = true;
         let title = document.getElementById("title");
@@ -150,15 +281,17 @@ export default function PostRecipe({modifyRecipe, user}) {
             recipe.image = imageData;
         }
         if (recipe.id) {
-            updateRecipe(recipe);
+            updateRecipe(recipe, mainPath);
         } else {
-            postRecipe(recipe);
+            postRecipe(recipe, mainPath);
         }
     }
 
     function openFile(e) {
         let file = e.target.files[0];
         let reader = new FileReader();
+        const fileName = document.getElementsByClassName("file-name")[0];
+        fileName.textContent = file.name;
         reader.onload = function () {
             imageData = reader.result;
         };
@@ -168,26 +301,52 @@ export default function PostRecipe({modifyRecipe, user}) {
     return (
         <Box>
             <AddInstruction/>
+            <RemoveInstruction/>
             <AddCategory/>
+            <RemoveCategory/>
             <AddIngredient/>
+            <RemoveIngredient/>
             <form onSubmit={(e) => e.preventDefault()}>
                 <label className="label" htmlFor="title">Title: </label>
-                <input className="input" type="text" id="title" placeholder={recipe.title}/>
+                <input onChange={checkInput} className="input is-danger" type="text" id="title"
+                       placeholder={recipe.title}/>
                 <br/>
                 <label className="label" htmlFor="info">Info Text: </label>
-                <textarea className="textarea" id="info" placeholder={recipe.information}/>
+                <textarea onChange={checkInput} className="textarea is-danger" id="info"
+                          placeholder={recipe.information}/>
 
                 <br/>
                 <label className="label" htmlFor="instruction">Instructions: </label>
-                <button onClick={() => setShowInstruction(true)} className="button is-primary">Add Instruction:</button>
-                {recipe.instructions && <Box><ol><ListRecipeInstructions recipe={recipe}/></ol></Box>}
+                <button onClick={() => setShowAddInstruction(true)} className="button is-primary">Add Instruction
+                </button>
+                <button onClick={() => setShowRemoveInstruction(true)} className="button is-primary">Remove
+                    Instructions
+                </button>
+                {recipe.instructions && <Box>
+                    <ol><ListRecipeInstructions recipe={recipe}/></ol>
+                </Box>}
 
                 <br/>
-                <label className="label" htmlFor="image">Image: </label>
-                <input onChange={openFile} type="file" id="image" accept="image/*"/>
+                <div id="imageInput" className="file has-name">
+                    <label className="file-label" htmlFor="image">
+                        <input className="file-input" onChange={openFile} type="file" id="image" accept="image/*"/>
+                        <span className="file-cta">
+                            <span className="file-label">
+                                Choose a file...
+                            </span>
+                        </span>
+                        <span className="file-name">
+                            File name
+                        </span>
+                    </label>
+                </div>
+
                 <br/>
                 <label className="label" htmlFor="ingredients">Ingredients: </label>
-                <button onClick={() => setShowIngredient(true)} className="button is-primary">Add Ingredient</button>
+                <button onClick={() => setShowAddIngredient(true)} className="button is-primary">Add Ingredient</button>
+                <button onClick={() => setShowRemoveIngredient(true)} className="button is-primary">Remove
+                    Ingredients
+                </button>
                 <Table>
                     <thead>
                     <tr>
@@ -201,11 +360,16 @@ export default function PostRecipe({modifyRecipe, user}) {
                     </tbody>
                 </Table>
                 <label className="label" htmlFor="ingredients">Categories: </label>
-                {recipe.categories && <Box><li><ListRecipeCategories recipe={recipe}/></li></Box>}
-                <button onClick={() => setShowCategory(true)} className="button is-primary">Add Category</button>
-
+                {recipe.categories && <Box>
+                    <li><ListRecipeCategories recipe={recipe}/></li>
+                </Box>}
+                <button onClick={() => setShowAddCategory(true)} className="button is-primary">Add Category</button>
+                <button onClick={() => setShowRemoveCategory(true)} className="button is-primary">Remove
+                    Categories
+                </button>
                 <br/>
-                <button onClick={() => sendRecipe()} id="submitButton" className="button is-primary">Post Recipe</button>
+                <button onClick={() => sendRecipe()} id="submitButton" className="button is-primary">Post Recipe
+                </button>
             </form>
         </Box>
     )

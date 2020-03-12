@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 
 import nu.te4.fullstack_slutprojekt.beans.RecipeBean;
 import nu.te4.fullstack_slutprojekt.entities.Recipe;
+import nu.te4.fullstack_slutprojekt.websocket.WsEndpoint;
 
 import java.io.InputStream;
 import java.sql.Blob;
@@ -46,6 +47,7 @@ public class RecipeResource {
     public Response addRecipe(Recipe recipe) {
         int id = recipeBean.addRecipe(recipe);
         if (id > 0) {
+            WsEndpoint.recipeUpdate();
             return Response.status(Response.Status.CREATED).entity(id).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
@@ -76,6 +78,7 @@ public class RecipeResource {
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
     public Response addImgToRecipe(@PathParam("id") int id, InputStream image) {
         if (recipeBean.addImage(id, image) > 0) {
+            WsEndpoint.recipeUpdate();
             return Response.status(Response.Status.CREATED).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
@@ -103,6 +106,7 @@ public class RecipeResource {
     @Path("/recipe/{id}")
     public Response removeRecipe(@PathParam("id") int id) {
         if (recipeBean.removeRecipe(id) > 0) {
+            WsEndpoint.recipeUpdate();
             return Response.status(Response.Status.OK).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();

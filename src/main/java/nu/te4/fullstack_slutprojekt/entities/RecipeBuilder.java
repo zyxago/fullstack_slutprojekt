@@ -14,6 +14,7 @@ public class RecipeBuilder {
     private int likes;
     private int reports;
     private int writerId;
+    private String writer;
 
     public RecipeBuilder() {
     }
@@ -28,11 +29,14 @@ public class RecipeBuilder {
         if (getInformation() == null) {
             setInformation("No Information available");
         }
-        if (getInstructions() == null) {
-            throw new IllegalStateException("A recipe must have instructions");
+        if(getWriter() == null) {
+            throw new IllegalStateException("A recipe must have a writer");
         }
         if (getTitle() == null) {
             throw new IllegalStateException("A recipe must have a title");
+        }
+        if (getInstructions() == null) {
+            throw new IllegalStateException("A recipe must have instructions");
         }
         if (getIngredients() == null) {
             throw new IllegalStateException("A recipe must have ingredients");
@@ -130,6 +134,15 @@ public class RecipeBuilder {
 
     public RecipeBuilder setTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    public String getWriter() {
+        return writer;
+    }
+
+    public RecipeBuilder setWriter(String writer) {
+        this.writer = writer;
         return this;
     }
 }

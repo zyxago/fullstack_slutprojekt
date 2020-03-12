@@ -45,6 +45,7 @@ public class RecipeBuilderTest {
                 .setIngredients(new ArrayList<>())
                 .setInstructions(new ArrayList<>())
                 .setTitle("")
+                .setWriter("")
                 .setCategories(null);
         try {
             instance.build();
@@ -64,6 +65,7 @@ public class RecipeBuilderTest {
                 .setIngredients(new ArrayList<>())
                 .setInstructions(null)
                 .setTitle("")
+                .setWriter("")
                 .setCategories(new ArrayList<>());
         try {
             instance.build();
@@ -83,6 +85,7 @@ public class RecipeBuilderTest {
                 .setIngredients(null)
                 .setInstructions(new ArrayList<>())
                 .setTitle("")
+                .setWriter("")
                 .setCategories(new ArrayList<>());
         try {
             instance.build();
@@ -104,6 +107,7 @@ public class RecipeBuilderTest {
                 .setInstructions(new ArrayList<>())
                 .setCategories(new ArrayList<>())
                 .setTitle("")
+                .setWriter("")
                 .build();
         int expResult = 0;
         Recipe result = instance.build();
@@ -121,6 +125,7 @@ public class RecipeBuilderTest {
                 .setIngredients(new ArrayList<>())
                 .setInstructions(new ArrayList<>())
                 .setTitle("")
+                .setWriter("")
                 .setCategories(new ArrayList<>())
                 .build();
         int expResult = 0;
@@ -137,10 +142,30 @@ public class RecipeBuilderTest {
         instance
                 .setIngredients(new ArrayList<>())
                 .setInstructions(new ArrayList<>())
+                .setWriter("")
                 .setCategories(new ArrayList<>());
         try {
             instance.build();
             fail("Did not throw IllegalStateException when Title was NULL.");
+        } catch (IllegalStateException e) {
+
+        }
+    }
+
+    /**
+     * Test of build method, of class RecipeBuilder. writer == NULL
+     */
+    @Test
+    public void testBuildNullWriter() {
+        System.out.println("build:recipe - NULL Writer");
+        instance
+                .setIngredients(new ArrayList<>())
+                .setInstructions(new ArrayList<>())
+                .setTitle("")
+                .setCategories(new ArrayList<>());
+        try {
+            instance.build();
+            fail("Did not throw IllegalStateException when Writer was NULL.");
         } catch (IllegalStateException e) {
 
         }

@@ -1,7 +1,7 @@
 import User from "../../entities/User";
 
-export async function getToken(code, setUser){
-    const res = await fetch("/fullstack_slutprojekt-1.0/api/authenticate",{
+export async function getToken(code, setUser, mainPath){
+    const res = await fetch(`http://${window.location.host}${mainPath}/api/authenticate`,{
         method: "GET",
         headers:{
             'Authorization': code

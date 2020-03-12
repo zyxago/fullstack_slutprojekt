@@ -1,6 +1,6 @@
-export async function getIngredients(setIngredientList) {
+export async function getIngredients(setIngredientList, mainPath) {
     const list = [];
-    const result = await fetch("/fullstack_slutprojekt-1.0/api/ingredients");
+    const result = await fetch(`http://${window.location.host}${mainPath}/api/ingredients`);
     const data = await result.json();
     for (const ingredient of data) {
         list.push(ingredient);
@@ -8,9 +8,9 @@ export async function getIngredients(setIngredientList) {
     setIngredientList(list);
 }
 
-export async function getMeasurements(setMeasurementList) {
+export async function getMeasurements(setMeasurementList, mainPath) {
     const list = [];
-    const result = await fetch("/fullstack_slutprojekt-1.0/api/ingredients/measurement");
+    const result = await fetch(`http://${window.location.host}${mainPath}/api/ingredients/measurement`);
     const data = await result.json();
     for (const measurement of data) {
         list.push(measurement);

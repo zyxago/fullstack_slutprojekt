@@ -45,7 +45,8 @@ public class RecipeBean {
                         .setLikes(data.getInt("likes"))
                         .setReports(data.getInt("reports"))
                         .setInformation(data.getString("info"))
-                        .setTitle(data.getString("title"));
+                        .setTitle(data.getString("title"))
+                        .setWriter(data.getString("writer"));
 
                 cs.setInt(1, data.getInt("id"));
                 if (cs.execute()) {

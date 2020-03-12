@@ -1,17 +1,19 @@
 import Comment from "../../entities/Comment";
 
-export async function getComments(id, setCommentList) {
+export async function getComments(id, setCommentList, mainPath) {
     const comments = [];
-    const res = await fetch(`/fullstack_slutprojekt-1.0/api/comments/${id}`);
+    const res = await fetch(`http://${window.location.host}${mainPath}/api/comments/${id}`);
+    if(res.status === 200){
     const data = await res.json();
     for (const comment of data) {
         comments.push(new Comment(comment));
     }
     setCommentList(comments);
+    }
 }
 
-export async function postComment(comment) {
-    const res = await fetch(`/fullstack_slutprojekt-1.0/api/comment`, {
+export async function postComment(comment, mainPath) {
+    const res = await fetch(`http://${window.location.host}${mainPath}/api/comment`, {
         method: "POST",
         headers: {
             'Authorization': window.localStorage.getItem("token"),
@@ -27,8 +29,8 @@ export async function postComment(comment) {
     }
 }
 
-export async function deleteComment(id) {
-    const res = await fetch(`/fullstack_slutprojekt-1.0/api/comment/${id}`, {
+export async function deleteComment(id, mainPath) {
+    const res = await fetch(`http://${window.location.host}${mainPath}/api/comment/${id}`, {
         method: "DELETE",
         headers: {
             'Authorization': window.localStorage.getItem("token")
@@ -42,8 +44,8 @@ export async function deleteComment(id) {
     }
 }
 
-export async function modifyComment(comment) {
-    const res = await fetch(`/fullstack_slutprojekt-1.0/api/comment/`, {
+export async function modifyComment(comment, mainPath) {
+    const res = await fetch(`http://${window.location.host}${mainPath}/api/comment/`, {
         method: "PUT",
         headers: {
             'Authorization': window.localStorage.getItem("token"),
@@ -59,8 +61,8 @@ export async function modifyComment(comment) {
     }
 }
 
-export async function likeComment(id, userId) {
-    const res = await fetch(`/fullstack_slutprojekt-1.0/api/comment/like/${id}/${userId}`, {
+export async function likeComment(id, userId, mainPath) {
+    const res = await fetch(`http://${window.location.host}${mainPath}/api/comment/like/${id}/${userId}`, {
         method: "PUT",
         headers: {
             'Authorization': window.localStorage.getItem("token")
@@ -68,8 +70,8 @@ export async function likeComment(id, userId) {
     });
 }
 
-export async function reportComment(id, userId) {
-    const res = await fetch(`/fullstack_slutprojekt-1.0/api/comment/report/${id}/${userId}`, {
+export async function reportComment(id, userId, mainPath) {
+    const res = await fetch(`http://${window.location.host}${mainPath}/api/comment/report/${id}/${userId}`, {
         method: "PUT",
         headers: {
             'Authorization': window.localStorage.getItem("token")
