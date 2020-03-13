@@ -1,7 +1,7 @@
 import User from "../../entities/User";
 
-export async function getToken(code, setUser, mainPath){
-    const res = await fetch(`http://${window.location.host}${mainPath}/api/authenticate`,{
+export async function getToken(code, setUser){
+    const res = await fetch(`api/authenticate`,{
         method: "GET",
         headers:{
             'Authorization': code

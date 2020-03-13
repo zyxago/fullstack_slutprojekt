@@ -10,10 +10,10 @@ export default function Nav(props) {
             <Navbar.Menu className="is-active">
                 <Navbar.Container position="end">
                     <Navbar.Item>
-                        <Link to={`${props.mainPath}`}>Home</Link>
+                        <Link to={`/`}>Home</Link>
                     </Navbar.Item>
                     {props.authorized && <Navbar.Item>
-                        <Link to={`${props.mainPath}/postRecipe`}>Post Recipe</Link>
+                        <Link to={`/postRecipe`}>Post Recipe</Link>
                     </Navbar.Item>}
                     {props.authorized ?
                         <Navbar.Item>

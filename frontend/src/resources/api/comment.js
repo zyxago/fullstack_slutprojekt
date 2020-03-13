@@ -44,8 +44,8 @@ export async function deleteComment(id, mainPath) {
     }
 }
 
-export async function modifyComment(comment, mainPath) {
-    const res = await fetch(`http://${window.location.host}${mainPath}/api/comment/`, {
+export async function modifyComment(comment) {
+    const res = await fetch(`api/comment/`, {
         method: "PUT",
         headers: {
             'Authorization': window.localStorage.getItem("token"),
@@ -61,8 +61,8 @@ export async function modifyComment(comment, mainPath) {
     }
 }
 
-export async function likeComment(id, userId, mainPath) {
-    const res = await fetch(`http://${window.location.host}${mainPath}/api/comment/like/${id}/${userId}`, {
+export async function likeComment(id, userId) {
+    const res = await fetch(`api/comment/like/${id}/${userId}`, {
         method: "PUT",
         headers: {
             'Authorization': window.localStorage.getItem("token")
@@ -70,8 +70,8 @@ export async function likeComment(id, userId, mainPath) {
     });
 }
 
-export async function reportComment(id, userId, mainPath) {
-    const res = await fetch(`http://${window.location.host}${mainPath}/api/comment/report/${id}/${userId}`, {
+export async function reportComment(id, userId) {
+    const res = await fetch(`api/comment/report/${id}/${userId}`, {
         method: "PUT",
         headers: {
             'Authorization': window.localStorage.getItem("token")

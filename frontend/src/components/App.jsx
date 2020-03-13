@@ -10,7 +10,7 @@ import {RecipeFullView} from "./Recipe";
 import {getToken} from "../resources/api/authentication";
 import WsListener from "../resources/websocket/WsListener";
 
-const mainPath = '/slutprojekt-erikh';
+const mainPath = "/slutprojekt-erikh";
 
 export default function App() {
 
@@ -30,28 +30,22 @@ export default function App() {
         console.log(window.location.href);
         let path = window.location.href;
         let code = path.substring(path.indexOf('=') + 1);
-        getToken(code, setUser, mainPath);
+        getToken(code, setUser);
         window.history.replaceState({}, document.title, "./");
     }
 
     return (
         <Container>
-            <Router>
-                <Header title="Recipe List" mainPath={mainPath} signedIn={user} setUser={setUser}/>
+            <Router basename={mainPath}>
+                <Header title="Recipe List" signedIn={user} setUser={setUser}/>
                 <Content>
                     <Switch>
-                        <Route exact path={mainPath}><RecipeTable wsValue={refresh} mainPath={mainPath}
-                                                                  setSelectedRecipe={setSelectedRecipe}
-                                                                  signedIn={user}/></Route>
+                        <Route exact path="/"><RecipeTable wsValue={refresh} setSelectedRecipe={setSelectedRecipe} signedIn={user}/></Route>
                         {user &&
-                        <Route path={`${mainPath}/postRecipe`}><PostRecipe mainPath={mainPath} user={user}/></Route>}
-                        {user && <Route path={`${mainPath}/editRecipe`}><PostRecipe mainPath={mainPath}
-                                                                                    modifyRecipe={selectedRecipe}
-                                                                                    user={user}/></Route>}
-                        <Route path={`${mainPath}/${selectedRecipe.title}`}><RecipeFullView recipe={selectedRecipe}
-                                                                                            mainPath={mainPath}
-                                                                                            user={user}/></Route>
-                        <Redirect to={mainPath}/>
+                        <Route path={`/postRecipe`}><PostRecipe user={user}/></Route>}
+                        {user && <Route path={`/editRecipe`}><PostRecipe modifyRecipe={selectedRecipe} user={user}/></Route>}
+                        <Route path={`/${selectedRecipe.title}`}><RecipeFullView recipe={selectedRecipe} user={user}/></Route>
+                        <Redirect to="/"/>
                     </Switch>
                 </Content>
             </Router>

@@ -3,11 +3,10 @@ import Recipe from "../../entities/Recipe";
 /**
  *
  * @param setRecipeList
- * @param mainPath
  * @returns {Promise<void>}
  */
-export async function getRecipes(setRecipeList, mainPath) {
-    const res = await fetch(`http://${window.location.host}${mainPath}/api/recipes`);
+export async function getRecipes(setRecipeList) {
+    const res = await fetch(`api/recipes`);
     if (res.status === 200) {
         const data = await res.json();
         const recipes = [];
@@ -16,7 +15,7 @@ export async function getRecipes(setRecipeList, mainPath) {
                 let recipe = new Recipe(recipeData);
                 await getRecipeImage(recipeData.id, (img) => {
                     recipe.image = img
-                }, mainPath);
+                });
                 recipes.push(recipe)
             }
         }
@@ -24,8 +23,8 @@ export async function getRecipes(setRecipeList, mainPath) {
     }
 }
 
-export async function likeRecipe(id, userId, mainPath) {
-    const res = await fetch(`http://${window.location.host}${mainPath}/api/recipe/like/${id}/${userId}`, {
+export async function likeRecipe(id, userId) {
+    const res = await fetch(`api/recipe/like/${id}/${userId}`, {
         method: "PUT",
         headers: {
             'Authorization': window.localStorage.getItem("token"),
@@ -36,8 +35,8 @@ export async function likeRecipe(id, userId, mainPath) {
     console.log(data);
 }
 
-export async function reportRecipe(id, userId, mainPath) {
-    const res = await fetch(`http://${window.location.host}${mainPath}/api/recipe/report/${id}/${userId}`, {
+export async function reportRecipe(id, userId) {
+    const res = await fetch(`api/recipe/report/${id}/${userId}`, {
         method: "PUT",
         headers: {
             'Authorization': window.localStorage.getItem("token"),
@@ -52,11 +51,10 @@ export async function reportRecipe(id, userId, mainPath) {
  *
  * @param id
  * @param setRecipeImage
- * @param mainPath
  * @returns {Promise<void>}
  */
-export async function getRecipeImage(id, setRecipeImage, mainPath) {
-    const res = await fetch(`http://${window.location.host}${mainPath}/api/recipe/${id}/img`);
+export async function getRecipeImage(id, setRecipeImage) {
+    const res = await fetch(`api/recipe/${id}/img`);
     const data = await res.blob();
     setRecipeImage(URL.createObjectURL(data));
 }
@@ -64,13 +62,12 @@ export async function getRecipeImage(id, setRecipeImage, mainPath) {
 /**
  *
  * @param recipe
- * @param mainPath
  * @returns {Promise<void>}
  */
-export async function postRecipe(recipe, mainPath) {
+export async function postRecipe(recipe) {
     const image = recipe.image;
     recipe.image = null;
-    const res = await fetch(`http://${window.location.host}${mainPath}/api/recipe`, {
+    const res = await fetch(`api/recipe`, {
         method: "POST",
         headers: {
             'Authorization': window.localStorage.getItem("token"),
@@ -79,14 +76,14 @@ export async function postRecipe(recipe, mainPath) {
         body: JSON.stringify(recipe)
     });
     const data = await res.json();
-    await updateRecipeImage(data, image, mainPath);
+    await updateRecipeImage(data, image);
 }
 
 
-export async function updateRecipe(recipe, mainPath) {
+export async function updateRecipe(recipe) {
     const image = recipe.image;
     recipe.image = null;
-    const res = await fetch(`http://${window.location.host}${mainPath}/api/recipe`, {
+    const res = await fetch(`api/recipe`, {
         method: "PUT",
         headers: {
             'Authorization': window.localStorage.getItem("token"),
@@ -94,7 +91,7 @@ export async function updateRecipe(recipe, mainPath) {
         },
         body: JSON.stringify(recipe)
     });
-    await updateRecipeImage(recipe.id, image, mainPath)
+    await updateRecipeImage(recipe.id, image)
 }
 
 /**
@@ -103,8 +100,8 @@ export async function updateRecipe(recipe, mainPath) {
  * @param image
  * @returns {Promise<void>}
  */
-export async function updateRecipeImage(id, image, mainPath) {
-    const res = await fetch(`http://${window.location.host}${mainPath}/api/recipe/${id}/img`, {
+export async function updateRecipeImage(id, image) {
+    const res = await fetch(`api/recipe/${id}/img`, {
         method: "PUT",
         headers: {
             'Authorization': window.localStorage.getItem("token"),
@@ -120,8 +117,8 @@ export async function updateRecipeImage(id, image, mainPath) {
     }
 }
 
-export async function removeRecipe(id, mainPath) {
-    const res = await fetch(`http://${window.location.host}${mainPath}/api/recipe/${id}/`, {
+export async function removeRecipe(id) {
+    const res = await fetch(`api/recipe/${id}/`, {
         method: "DELETE",
         headers: {
             'Authorization': window.localStorage.getItem("token")

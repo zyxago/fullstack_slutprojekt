@@ -1,5 +1,5 @@
 import React from "react";
-import {Table, Modal, Content, Box} from "react-bulma-components";
+import {Box, Content, Modal, Table} from "react-bulma-components";
 import Recipe from "../entities/Recipe";
 import Ingredient from "../entities/Ingredient";
 import {ListRecipeCategories, ListRecipeInstructions, TableRowRecipeIngredients} from "./Recipe";
@@ -9,7 +9,7 @@ import {getIngredients, getMeasurements} from "../resources/api/ingredient";
 
 let imageData = undefined;
 
-export default function PostRecipe({modifyRecipe, user, mainPath}) {
+export default function PostRecipe({modifyRecipe, user}) {
 
     const [categories, setCategories] = React.useState([]);
     const [ingredients, setIngredients] = React.useState([]);
@@ -27,13 +27,13 @@ export default function PostRecipe({modifyRecipe, user, mainPath}) {
     const [recipe, setRecipe] = React.useState(modifyRecipe || new Recipe());
 
     React.useEffect(() => {
-        getCategories(setCategories, mainPath)
+        getCategories(setCategories)
     }, []);
     React.useEffect(() => {
-        getIngredients(setIngredients, mainPath)
+        getIngredients(setIngredients)
     }, []);
     React.useEffect(() => {
-        getMeasurements(setMeasurements, mainPath)
+        getMeasurements(setMeasurements)
     }, []);
 
     function checkInput(e) {
@@ -281,9 +281,9 @@ export default function PostRecipe({modifyRecipe, user, mainPath}) {
             recipe.image = imageData;
         }
         if (recipe.id) {
-            updateRecipe(recipe, mainPath);
+            updateRecipe(recipe);
         } else {
-            postRecipe(recipe, mainPath);
+            postRecipe(recipe);
         }
     }
 

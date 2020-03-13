@@ -10,19 +10,18 @@ import {submitComment} from "../logic/comment";
 /**
  *
  * @param recipe
- * @param mainPath
  * @param user
  * @returns {*}
  * @constructor
  */
-export function RecipeFullView({recipe, mainPath, user}) {
+export function RecipeFullView({recipe, user}) {
 
     if (user === undefined) {
         user = false;
     }
 
     function deleteRecipe(id) {
-        removeRecipe(id, mainPath);
+        removeRecipe(id);
     }
 
     return (
@@ -33,13 +32,13 @@ export function RecipeFullView({recipe, mainPath, user}) {
                     <div className="header-right">
                     {user && <>
                         <button className="button"
-                                onClick={() => likeRecipe(recipe.id, user.id, mainPath)}>Like {recipe.likes}</button>
+                                onClick={() => likeRecipe(recipe.id, user.id)}>Like {recipe.likes}</button>
                         <button className="button"
-                                onClick={() => reportRecipe(recipe.id, user.id, mainPath)}>Report
+                                onClick={() => reportRecipe(recipe.id, user.id)}>Report
                         </button>
                         {user.id === recipe.writerId && <>
-                            <Link className="button" to={`${mainPath}/editRecipe`}>Edit</Link>
-                            <button className="button" onClick={() => deleteRecipe(recipe.id, mainPath)}>Remove
+                            <Link className="button" to={`/editRecipe`}>Edit</Link>
+                            <button className="button" onClick={() => deleteRecipe(recipe.id)}>Remove
                                 Recipe
                             </button>
                         </>}
@@ -73,23 +72,23 @@ export function RecipeFullView({recipe, mainPath, user}) {
                     {user && <>
                         <input className="input" type="text" placeholder="Say something..." id="commentInput"/>
                         <button className="button"
-                                onClick={() => submitComment(document.getElementById("commentInput").value, user, recipe.id, mainPath)}>Comment
+                                onClick={() => submitComment(document.getElementById("commentInput").value, user, recipe.id)}>Comment
                         </button>
                     </>}
-                    <CommentList parentId={recipe.id} user={user} mainPath={mainPath}/>
+                    <CommentList parentId={recipe.id} user={user}/>
                 </Content>
             </Card.Content>
         </Card>
     );
 }
 
-export function RecipeBriefView({recipe, setSelectedRecipe, mainPath}) {
+export function RecipeBriefView({recipe, setSelectedRecipe}) {
     return (
         <Card>
             <Card.Content>
                 <Content>
                     <h2 onClick={() => setSelectedRecipe(recipe)}><Link
-                        to={`${mainPath}/${recipe.title}`}><strong>{recipe.title}</strong>{` av ${recipe.writer}`}
+                        to={`/${recipe.title}`}><strong>{recipe.title}</strong>{` av ${recipe.writer}`}
                     </Link>
                     </h2>
                     <Media>
