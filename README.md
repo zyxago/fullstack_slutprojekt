@@ -1,6 +1,6 @@
-#Recipe List Fullstack Project
+# Recipe List Fullstack Project
 
-##To run project
+## To run project
 
 ### Database
 1. Set up a mysql server to host the db schema on
