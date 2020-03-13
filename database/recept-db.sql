@@ -172,6 +172,8 @@ CREATE TABLE `ingredient_recipe` (
   `measurement` varchar(45) NOT NULL,
   PRIMARY KEY (`recipe_id`,`ingredient`),
   KEY `messurment_idx` (`measurement`),
+  KEY `ingredient_idx` (`ingredient`),
+  CONSTRAINT `ingredient` FOREIGN KEY (`ingredient`) REFERENCES `ingredient` (`ingredient`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `messurment` FOREIGN KEY (`measurement`) REFERENCES `measurement` (`measurement`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `recipe_ingredient_id` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Recipe Ingredients';
@@ -276,6 +278,7 @@ CREATE TABLE `recipe` (
   `info` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `writer_id_idx` (`writer_id`),
+  CONSTRAINT `recipe_post_id` FOREIGN KEY (`id`) REFERENCES `post` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `writer_id` FOREIGN KEY (`writer_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COMMENT='Recipe';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -576,4 +579,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-13  8:37:24
+-- Dump completed on 2020-03-13 12:42:11
