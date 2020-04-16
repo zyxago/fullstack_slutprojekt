@@ -19,12 +19,15 @@ export default function App() {
     const [refresh, setRefresh] = React.useState(0);
     const ws = React.useRef({});
 
+    //Eftersom detta bara skall köras en gång behöver du skicka in en tom
+    //list som andra argument till useEffect för att indikera att effekten
+    //inte är har några beroenden till stat eller props.
     React.useEffect(() => {
         ws.current = new WsListener(mainPath);
         ws.current.ws.addEventListener("message", (e) => {
             setRefresh(oldValue => oldValue + 1);
         });
-    });
+    }, []);
 
     if (window.location.href.includes("?code=") && user === undefined) {
         console.log(window.location.href);
