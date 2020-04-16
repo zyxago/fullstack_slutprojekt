@@ -10,7 +10,8 @@ export default function CommentList({parentId, user}) {
         getComments(parentId, setComments)
     }, []);
 
-    function ListComments({comments}) {
+    //Funkar, men lite okonventionellt och omständigt
+/*     function ListComments({comments}) {
         return comments.map((comment, index) => {
             return <Box key={`comment-${index}`}>
                 <Media>
@@ -26,5 +27,18 @@ export default function CommentList({parentId, user}) {
         <ul>
             <ListComments comments={comments}/>
         </ul>
-    )
+    ) */
+
+    //alternativ:
+    const content = comments.map((comment, index) => (
+        <Box key={`comment-${index}`}>
+            <Media>
+                <Media.Content>
+                    <Media.Item><Comment comment={comment} user={user}/></Media.Item>
+                </Media.Content>
+            </Media>
+        </Box>));
+       
+    return <ul>{content}</ul>
+
 }

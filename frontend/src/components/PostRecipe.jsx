@@ -36,6 +36,11 @@ export default function PostRecipe({modifyRecipe, user}) {
         getMeasurements(setMeasurements)
     }, []);
 
+    //Att uppdatera i DOMen vid sidan av react på det här sättet funkar,
+    //men om react bestämmer sig för att rendera om så kommer dessa css-klasser 
+    //att försvinna från elementen.
+    //en mer robust lösning hade varit att skapa en komponent som bara wrappar den 
+    //här funktionaliteten. 
     function checkInput(e) {
         let element = e.target;
         if (element.value !== "") {
@@ -71,6 +76,10 @@ export default function PostRecipe({modifyRecipe, user}) {
         setShowAddCategory(false);
     }
 
+
+    //Lite okonventionellt att deklarara komponenter I andra komponenter.
+    //Bör inte vara några problem egentligen, men blir lite rörigt att resonera kring
+    //när du använder state/props från den yttre komponenten i dessa lokala komponenter
     function AddInstruction() {
         return (
             <Modal show={showAddInstruction} onClose={() => setShowAddInstruction(false)}>
@@ -245,6 +254,8 @@ export default function PostRecipe({modifyRecipe, user}) {
         });
     }
 
+    //funkar detta? Du ändrar i recipe-objektet, men jag kan inte se att du
+    //anropar setRecipe för att ändringarna skall slå igenom.
     function removeMarkedUnits(identifier) {
         if (identifier === "instruction") {
             for (let i = 0; i < recipe.instructions.length; i++) {
@@ -277,6 +288,9 @@ export default function PostRecipe({modifyRecipe, user}) {
         recipe.title = title.value !== title.placeholder && title.value !== "" ? title.value : title.placeholder;
         recipe.information = information.value !== information.placeholder && information.value !== "" ? information.value : information.placeholder;
         recipe.writerId = user.id;
+
+        //Tror att om du skapar flera recept efter att du skapat ett med bild
+        //så kommer alla efterföljande få samma bild :)
         if (imageData !== undefined) {
             recipe.image = imageData;
         }

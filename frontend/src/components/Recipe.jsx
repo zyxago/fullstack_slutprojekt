@@ -20,6 +20,7 @@ export function RecipeFullView({recipe, user}) {
         user = false;
     }
 
+    //onödigt. Du kan använda removeRecipe direkt
     function deleteRecipe(id) {
         removeRecipe(id);
     }
@@ -107,6 +108,7 @@ export function RecipeBriefView({recipe, setSelectedRecipe}) {
 
 export function TableRowRecipeIngredients({recipe}) {
     let ingredients = [];
+    //array.map är både mer läsbart och enklare
     for (const ingredient of recipe.ingredients) {
         ingredients.push(<TableRowIngredient key={ingredient.name} ingredient={ingredient}/>)
     }
@@ -115,14 +117,20 @@ export function TableRowRecipeIngredients({recipe}) {
 
 export function ListRecipeCategories({recipe}) {
     let categories = [];
-    for (const category of recipe.categories) {
+    //array.map är både mer läsbart och enklare. Där får du även ut index
+/*     for (const category of recipe.categories) {
         categories.push(<li key={recipe.categories.indexOf(category)}>{category}</li>)
-    }
+    } */
+
+    //till exempel
+    categories = recipe.categories.map((category, i) => <li key={i}>{category}</li>)
     return categories;
 }
 
 export function ListRecipeInstructions({recipe}) {
     let instructions = [];
+
+    //se ovan
     for (const instruction of recipe.instructions) {
         instructions.push(<li key={`instruction-${recipe.instructions.indexOf(instruction)}`}>{instruction}</li>)
     }

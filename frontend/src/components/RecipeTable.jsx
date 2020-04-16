@@ -10,7 +10,8 @@ export default function RecipeTable({wsValue, setSelectedRecipe}) {
         getRecipes(setRecipeList)
     }, [wsValue]);
 
-    function PopulateTable({recipeList}) {
+    //Lite omständigt sätt att bara rendera en lista med recept :)
+/*     function PopulateTable({recipeList}) {
         const recipes = [];
         for (const recipe of recipeList) {
             recipes.push(<RecipeBriefView key={recipe.id} recipe={recipe} setSelectedRecipe={setSelectedRecipe}/>)
@@ -22,5 +23,12 @@ export default function RecipeTable({wsValue, setSelectedRecipe}) {
         <div>
             <PopulateTable recipeList={recipeList}/>
         </div>
-    );
+    ); */
+
+    //enklare såhär
+    return (
+        <div>
+            {recipeList.map(recipe => <RecipeBriefView key={recipe.id} recipe={recipe} setSelectedRecipe={setSelectedRecipe}/>)}
+        </div>
+    )
 }
